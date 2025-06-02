@@ -1,0 +1,16 @@
+{
+	"id": "Balatrium",
+	"name": "Balatrium",
+	"display_name": "Balatrium",
+	"author": ["Wilfredlam0418"],
+	"description": "Adds the periodic table to Balatro.",
+	"prefix": "bium",
+	"main_file": "main.lua",
+	"priority": 118,
+	"badge_colour": "408080",
+	"badge_text_colour": "80ffff",
+	"version": "1.0.0~",
+	"dependencies": [
+		"Steamodded (>=1.*)"
+	]
+}

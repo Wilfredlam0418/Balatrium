@@ -1,0 +1,70 @@
+=== Balatrium Credits ===
+Main mod: Wilfredlam0418 (Creating idea, art and code)
+
+== Jokers ==
+Battery: Cryptid (Scaling copied from Chili Pepper), Six Suits (Badge copied from Exoplanet)
+Salt Cube: Cryptid (Scaling copied from Chili Pepper), ExampleJokersMod (Steamodded example mod, money payout copied from Golden Joker 2)
+Ununennium: Cryptid (Scaling copied from Chili Pepper), Six Suits (Badge copied from Exoplanet)
+Exuberant Joker: Cryptid (Hand check copied from The Duos), Six Suits (Badge copied from Exoplanet)
+Exultant Joker: Cryptid (Hand check copied from The Duos), Six Suits (Badge copied from Exoplanet)
+Rapturous Joker: Cryptid (Hand check copied from The Duos), Six Suits (Badge copied from Exoplanet)
+Blithe Joker: Cryptid (Hand check copied from The Duos), Six Suits (Badge copied from Exoplanet)
+Ecstatic Joker: Cryptid (Hand check copied from The Duos), Six Suits (Badge copied from Exoplanet)
+Thrilled Joker: Cryptid (Hand check copied from The Duos), Six Suits (Badge copied from Exoplanet)
+Enlivened Joker: Cryptid (Hand check copied from The Duos), Six Suits (Badge copied from Exoplanet)
+Enthusiastic Joker: Cryptid (Hand check copied from The Duos), Six Suits (Badge copied from Exoplanet)
+Delighted Joker: Cryptid (Hand check copied from The Duos), Six Suits (Badge copied from Exoplanet)
+Adrenalized Joker: Cryptid (Hand check copied from The Duos, pool check copied from The Swarm), Six Suits (Badge copied from Exoplanet)
+Astonishing Joker: Cryptid (Hand check copied from The Duos, pool check copied from The Swarm), Six Suits (Badge copied from Exoplanet)
+Staggering Joker: Cryptid (Hand check copied from The Duos, pool check copied from The Swarm), Six Suits (Badge copied from Exoplanet)
+Extraordinary Joker: Cryptid (Hand check copied from The Duos, pool check copied from The Swarm), Six Suits (Badge copied from Exoplanet)
+Perplexing Joker: Cryptid (Hand check copied from The Duos, pool check copied from The Swarm), Six Suits (Badge copied from Exoplanet)
+Spectacular Joker: Cryptid (Hand check copied from The Duos, pool check copied from The Swarm), Six Suits (Badge copied from Exoplanet)
+
+== Consumables ==
+
+= Spectral Cards =
+Balatrium: None
+
+= Element Cards =
+Hydrogen: Six Suits (Copied from The Star?)
+Deuterium: Six Suits (Badge copied from Exoplanet, suit change copied from The Star?)
+Tritium: Six Suits (Badge copied from Exoplanet, suit change copied from The Star?)
+Helium: Cryptid (Copied from Replica)
+Lithium: None
+Beryllium: None
+Boron: None
+Carbon: Six Suits (Copied from The Star?)
+Nitrogen: Six Suits (Copied from The Star?)
+Oxygen: Six Suits (Copied from The Star?)
+Fluorine: None
+Neon: Cryptid (Copied from Replica)
+Sodium: None
+Magnesium: None
+Aluminum: POLTERWORX (Discard bonus copied from Sorrow)
+Silicon: None
+Phosphorus: None
+Sulfur: Cryptid (Copied from Trade)
+Chlorine: None
+Argon: Cryptid (Copied from Replica)
+Potassium: None
+Calcium: None
+
+= Acid Cards =
+Hydrofluoric Acid: POLTERWORX (Copied from Solace and Sorrow)
+Hydrochloric Acid: None
+Hydrobromic Acid: None
+
+== Card Modifiers ==
+
+= Editions =
+Bright: Cryptid (Copied from Mosaic)
+
+== Booster Packs ==
+Atomic Packs: UnStable (Copied from Expansion Packs)
+
+== Others ==
+
+= Tablets =
+Idea inspired by Partner
+Code taken from Partner
