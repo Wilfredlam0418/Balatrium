@@ -55,16 +55,5 @@ Hydrofluoric Acid: POLTERWORX (Copied from Solace and Sorrow)
 Hydrochloric Acid: None
 Hydrobromic Acid: None
 
-== Card Modifiers ==
-
-= Editions =
-Bright: Cryptid (Copied from Mosaic)
-
 == Booster Packs ==
 Atomic Packs: UnStable (Copied from Expansion Packs)
-
-== Others ==
-
-= Tablets =
-Idea inspired by Partner
-Code taken from Partner
