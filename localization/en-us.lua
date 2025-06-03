@@ -2,7 +2,7 @@ return {
 	["misc"] = {
 		["dictionary"] = {
 			["b_acid_cards"] = "Acid Cards",
-			["b_element_cards"] = "Element Cards"
+			["b_element_cards"] = "Element Cards",
 			["k_bium_atomic_pack"] = "Atomic Pack",
 			["k_acid"] = "Acid",
 			["k_element"] = "Element",
