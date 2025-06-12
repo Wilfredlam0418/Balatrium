@@ -20,6 +20,18 @@ return {
 				["name"] = "Salt Cube",
 				["text"] = {"{C:money}+$#1#{} at the end of round", "Loses {C:red}-$#2#{} at the end of round"}
 			},
+			["j_bium_proton"] = {
+				["name"] = "Proton",
+				["text"] = {"Each scored card", "gives {C:mult}+#1#{} Mult"}
+			},
+			["j_bium_neutron"] = {
+				["name"] = "Neutron",
+				["text"] = {"Each scored card", "gives {X:mult,C:white}X#1#{} Mult"}
+			},
+			["j_bium_electron"] = {
+				["name"] = "Electron",
+				["text"] = {"Each scored card", "gives {C:chips}+#1#{} Chips"}
+			},
 			["j_bium_exuberant"] = {
 				["name"] = "Exuberant Joker",
 				["text"] = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids{}", "by {C:attention}#1#{} if played hand contains", "a {C:attention}Pair"}
