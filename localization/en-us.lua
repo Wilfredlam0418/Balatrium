@@ -32,10 +32,6 @@ return {
 				["name"] = "Electron",
 				["text"] = {"Each scored card", "gives {C:chips}+#1#{} Chips"}
 			},
-			["j_bium_systematic"] = {
-				["name"] = "Systematic Element Name",
-				["text"] = {"{C:mult}+#1#{} Mult if played", "hand contains exactly", "{C:attention}3{} scoring face cards"}
-			},
 			["j_bium_exuberant"] = {
 				["name"] = "Exuberant Joker",
 				["text"] = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids{}", "by {C:attention}#1#{} if played hand contains", "a {C:attention}Pair"}
