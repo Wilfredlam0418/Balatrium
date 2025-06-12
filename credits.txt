@@ -4,7 +4,9 @@ Main mod: Wilfredlam0418 (Creating idea, art and code)
 == Jokers ==
 Battery: Cryptid (Scaling copied from Chili Pepper), Six Suits (Badge copied from Exoplanet)
 Salt Cube: Cryptid (Scaling copied from Chili Pepper), ExampleJokersMod (Steamodded example mod, money payout copied from Golden Joker 2)
-Ununennium: Cryptid (Scaling copied from Chili Pepper), Six Suits (Badge copied from Exoplanet)
+Proton: None
+Neutron: None
+Electron: None
 Exuberant Joker: Cryptid (Hand check copied from The Duos), Six Suits (Badge copied from Exoplanet)
 Exultant Joker: Cryptid (Hand check copied from The Duos), Six Suits (Badge copied from Exoplanet)
 Rapturous Joker: Cryptid (Hand check copied from The Duos), Six Suits (Badge copied from Exoplanet)
