@@ -430,7 +430,7 @@ SMODS.Consumable {
 	key = "phosphorus",
 	config = {amount = 2, type = "Joker"},
 	atlas = "element",
-	pos = {x = 14, y = 3},
+	pos = {x = 15, y = 2},
 	loc_vars = function(self)
 		return {
 			vars = {
@@ -447,7 +447,7 @@ SMODS.Consumable {
 		for i=1, self.config.amount, 1 do
 			local card = create_card(self.config.type, G.jokers, nil, nil, true, true)
 			card:add_to_deck()
-			G.consumeables:emplace(card)
+			G.jokers:emplace(card)
 		end
 	end
 }
@@ -457,7 +457,7 @@ SMODS.Consumable {
 	key = "sulfur",
 	config = {},
 	atlas = "element",
-	pos = {x = 14, y = 4},
+	pos = {x = 16, y = 2},
 	loc_vars = function(self)
 		return {vars = {colours = {G.C.SECONDARY_SET.VOUCHER}}}
 	end,
@@ -809,6 +809,57 @@ SMODS.Joker {
 					colour = G.C.FILTER
 				}
 			end
+		end
+	end
+}
+
+SMODS.Joker {
+	key = "proton",
+	config = {extra = {mult = 2}},
+	pos = {x = 1, y = 1},
+	rarity = 1,
+	cost = 4,
+	atlas = "joker",
+	loc_vars = function(self)
+		return {vars = {self.config.extra.mult}}
+	end,
+	calculate = function(self, card, context)
+		if context.individual and context.cardarea == G.play then
+			return {message = localize({type = "variable", key = "a_mult", vars = {card.ability.extra.mult}}), mult_mod = card.ability.extra.mult}
+		end
+	end
+}
+
+SMODS.Joker {
+	key = "neutron",
+	config = {extra = {xmult = 1.2}},
+	pos = {x = 2, y = 1},
+	rarity = 2,
+	cost = 6,
+	atlas = "joker",
+	loc_vars = function(self)
+		return {vars = {self.config.extra.xmult}}
+	end,
+	calculate = function(self, card, context)
+		if context.individual and context.cardarea == G.play then
+			return {message = localize({type = "variable", key = "a_xmult", vars = {card.ability.extra.xmult}}), mult_mod = card.ability.extra.xmult}
+		end
+	end
+}
+
+SMODS.Joker {
+	key = "electron",
+	config = {extra = {chips = 15}},
+	pos = {x = 3, y = 1},
+	rarity = 1,
+	cost = 4,
+	atlas = "joker",
+	loc_vars = function(self)
+		return {vars = {self.config.extra.chips}}
+	end,
+	calculate = function(self, card, context)
+		if context.individual and context.cardarea == G.play then
+			return {message = localize({type = "variable", key = "a_chips", vars = {card.ability.extra.chips}}), chip_mod = card.ability.extra.chips}
 		end
 	end
 }
