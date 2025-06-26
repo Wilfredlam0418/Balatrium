@@ -417,7 +417,7 @@ SMODS.Consumable {
 		return true
 	end,
 	use = function(self, card)
-		for i=1, card.ability.amount, 1 do
+		for i=1, card.ability.amount do
 			local _card = create_card(card.ability.extra.type, G.consumeables, nil, nil, true, true)
 			_card:add_to_deck()
 			G.consumeables:emplace(_card)
@@ -444,7 +444,7 @@ SMODS.Consumable {
 		return true
 	end,
 	use = function(self, card)
-		for i=1, card.ability.amount, 1 do
+		for i=1, card.ability.amount do
 			local _card = create_card(card.ability.type, G.jokers, nil, nil, true, true)
 			_card:add_to_deck()
 			G.jokers:emplace(_card)
@@ -860,8 +860,37 @@ SMODS.Joker {
 	end
 }
 
+SMODS.Joker {
+	key = "systematic",
+	config = {extra = {mult = 25}},
+	pos = {x = 0, y = 1},
+	rarity = 2,
+	cost = 5,
+	atlas = "joker",
+	loc_vars = function(self)
+		return {vars = {card.ability.extra.mult}}
+	end,
+	calculate = function(self, card, context)
+		if context.joker_main then
+			local letter_count = 0
+			for i=1, #G.play.cards do
+				if G.play.cards[i]:get_id() > 10 then
+					letter_count = letter_count + 1
+				end
+			end
+			if letter_count == 3 then
+				return {mult_mod = card.ability.extra.mult}
+			end
+		end
+	end
+}
+
 local acidity_increase = function(self, card, badges)
 	badges[#badges + 1] = create_badge(localize("k_acidity_increase"), get_type_colour(self or card.config, card), nil, 1.2)
+end
+
+local acidity_multiply = function(self, card, badges)
+	badges[#badges + 1] = create_badge(localize("k_acidity_multiply"), get_type_colour(self or card.config, card), nil, 1.2)
 end
 
 SMODS.Joker {
@@ -877,7 +906,7 @@ SMODS.Joker {
 	calculate = function(self, card, context)
 		if context.joker_main then
 			if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
-				for i=1, #G.consumeables.cards, 1 do
+				for i=1, #G.consumeables.cards do
 					if G.consumeables.cards[i].ability.set == "Acid" then
 						G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 					end
@@ -901,7 +930,7 @@ SMODS.Joker {
 	calculate = function(self, card, context)
 		if context.joker_main then
 			if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
-				for i=1, #G.consumeables.cards, 1 do
+				for i=1, #G.consumeables.cards do
 					if G.consumeables.cards[i].ability.set == "Acid" then
 						G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 					end
@@ -925,7 +954,7 @@ SMODS.Joker {
 	calculate = function(self, card, context)
 		if context.joker_main then
 			if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
-				for i=1, #G.consumeables.cards, 1 do
+				for i=1, #G.consumeables.cards do
 					if G.consumeables.cards[i].ability.set == "Acid" then
 						G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 					end
@@ -949,7 +978,7 @@ SMODS.Joker {
 	calculate = function(self, card, context)
 		if context.joker_main then
 			if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
-				for i=1, #G.consumeables.cards, 1 do
+				for i=1, #G.consumeables.cards do
 					if G.consumeables.cards[i].ability.set == "Acid" then
 						G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 					end
@@ -973,7 +1002,7 @@ SMODS.Joker {
 	calculate = function(self, card, context)
 		if context.joker_main then
 			if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
-				for i=1, #G.consumeables.cards, 1 do
+				for i=1, #G.consumeables.cards do
 					if G.consumeables.cards[i].ability.set == "Acid" then
 						G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 					end
@@ -987,7 +1016,7 @@ SMODS.Joker {
 function numbers_to_word(numbers)
 	numbers_to_word_letters = "abcdefghijklmnopqrstuvwxyz"
 	numbers_to_word_string = ""
-	for i=1, #numbers, 1 do
+	for i=1, #numbers do
 		numbers_to_word_string = numbers_to_word_string .. (numbers_to_word_letters.sub(numbers_to_word_letters, numbers[i], numbers[i]) or "")
 	end
 	return numbers_to_word_string
@@ -1007,7 +1036,7 @@ if next(SMODS.find_mod("Cryptid")) then
 		calculate = function(self, card, context)
 			if context.joker_main then
 				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
-					for i=1, #G.consumeables.cards, 1 do
+					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 						end
@@ -1031,7 +1060,7 @@ if next(SMODS.find_mod("Cryptid")) then
 		calculate = function(self, card, context)
 			if context.joker_main then
 				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
-					for i=1, #G.consumeables.cards, 1 do
+					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 						end
@@ -1055,7 +1084,7 @@ if next(SMODS.find_mod("Cryptid")) then
 		calculate = function(self, card, context)
 			if context.joker_main then
 				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
-					for i=1, #G.consumeables.cards, 1 do
+					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 						end
@@ -1079,7 +1108,7 @@ if next(SMODS.find_mod("Cryptid")) then
 		calculate = function(self, card, context)
 			if context.joker_main then
 				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
-					for i=1, #G.consumeables.cards, 1 do
+					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 						end
@@ -1103,7 +1132,7 @@ if next(SMODS.find_mod("Cryptid")) then
 		calculate = function(self, card, context)
 			if context.joker_main then
 				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
-					for i=1, #G.consumeables.cards, 1 do
+					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 						end
@@ -1133,7 +1162,7 @@ if next(SMODS.find_mod("Cryptid")) then
 		calculate = function(self, card, context)
 			if context.joker_main then
 				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
-					for i=1, #G.consumeables.cards, 1 do
+					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.aciditycard.ability.extra.acidity
 						end
@@ -1163,7 +1192,7 @@ if next(SMODS.find_mod("Cryptid")) then
 		calculate = function(self, card, context)
 			if context.joker_main then
 				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
-					for i=1, #G.consumeables.cards, 1 do
+					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 						end
@@ -1193,7 +1222,7 @@ if next(SMODS.find_mod("Cryptid")) then
 		calculate = function(self, card, context)
 			if context.joker_main then
 				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
-					for i=1, #G.consumeables.cards, 1 do
+					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 						end
@@ -1223,7 +1252,7 @@ if next(SMODS.find_mod("Cryptid")) then
 		calculate = function(self, card, context)
 			if context.joker_main then
 				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
-					for i=1, #G.consumeables.cards, 1 do
+					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 						end
@@ -1253,12 +1282,72 @@ if next(SMODS.find_mod("Cryptid")) then
 		calculate = function(self, card, context)
 			if context.joker_main then
 				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
-					for i=1, #G.consumeables.cards, 1 do
+					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 						end
 					end
 					return {message = acidity_increase, colour = G.C.SECONDARY_SET.Acid}
+				end
+			end
+		end,
+		in_pool = function(self)
+			if G.GAME.hands[self.config.type].played > 0 then
+				return true
+			end
+			return false
+		end
+	}
+
+	SMODS.Joker {
+		key = "nullified",
+		config = {extra = {acidity = 1, type = "cry_None"}},
+		pos = { x = 0, y = 3 },
+		rarity = 1,
+		cost = 4,
+		atlas = "acidjokers",
+		loc_vars = function(self, info_queue, card)
+			return {vars = {card.ability.acidity}}
+		end,
+		calculate = function(self, card, context)
+			if context.joker_main then
+				if context.poker_hands ~= nil and context.scoring_name == "cry_None" then
+					for i=1, #G.consumeables.cards do
+						if G.consumeables.cards[i].ability.set == "Acid" then
+							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
+						end
+					end
+					return {message = acidity_increase, colour = G.C.SECONDARY_SET.Acid}
+				end
+			end
+		end,
+		in_pool = function(self)
+			if G.GAME.hands[self.config.type].played > 0 then
+				return true
+			end
+			return false
+		end
+	}
+
+	SMODS.Joker {
+		key = "transcendent",
+		config = {extra = {xacidity = 5.2, type = "cry_WholeDeck"}},
+		pos = { x = 4, y = 2 },
+		rarity = 1,
+		cost = 4,
+		atlas = "acidjokers",
+		loc_vars = function(self, info_queue, card)
+			return {vars = {card.ability.acidity}}
+		end,
+		calculate = function(self, card, context)
+			if context.joker_main then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
+					for i=1, #G.consumeables.cards do
+						if G.consumeables.cards[i].ability.set == "Acid" then
+							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity * card.ability.extra.acidity
+						end
+					end
+					return {message = acidity_multiply, colour = G.C.SECONDARY_SET.Acid}
 				end
 			end
 		end,
