@@ -5,6 +5,7 @@ return {
 			b_element_cards = "Element Cards",
 			k_bium_atomic_pack = "Atomic Pack",
 			k_acid = "Acid",
+			k_acidity_increase = "Acidity!",
 			k_element = "Element",
 			k_isotope = "Isotope",
 			k_used_up = "Used up!"
@@ -31,6 +32,10 @@ return {
 			j_bium_electron = {
 				name = "Electron",
 				text = {"Each scored card", "gives {C:chips}+#1#{} Chips"}
+			},
+			j_bium_systematic = {
+				name = "Systematic Element Name",
+				text = {"{C:mult}+#1#{} Mult if played hand contains", "exactly {C:attention}3{} Jacks, Queens, Kings or Aces"},
 			},
 			j_bium_exuberant = {
 				name = "Exuberant Joker",
@@ -91,6 +96,14 @@ return {
 			j_bium_spectacular = {
 				name = "Spectacular Joker",
 				text = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand contains", "an {C:attention}Ultimate Pair"}
+			},
+			j_bium_nullified = {
+				name = "Nullified Joker",
+				text = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand is", "a {C:attention}None"}
+			},
+			j_bium_spectacular = {
+				name = "Transcendent Joker",
+				text = {"Multiply the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand contains", "{C:attention}The Entire Deck"}
 			}
 		},
 		Spectral = {
