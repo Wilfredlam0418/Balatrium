@@ -889,10 +889,6 @@ local acidity_increase = function(self, card, badges)
 	badges[#badges + 1] = create_badge(localize("k_acidity_increase"), get_type_colour(self or card.config, card), nil, 1.2)
 end
 
-local acidity_multiply = function(self, card, badges)
-	badges[#badges + 1] = create_badge(localize("k_acidity_multiply"), get_type_colour(self or card.config, card), nil, 1.2)
-end
-
 SMODS.Joker {
 	key = "exuberant",
 	config = {extra = {acidity = 1, type = "Pair"}},
@@ -1347,7 +1343,7 @@ if next(SMODS.find_mod("Cryptid")) then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity * card.ability.extra.acidity
 						end
 					end
-					return {message = acidity_multiply, colour = G.C.SECONDARY_SET.Acid}
+					return {message = acidity_increase, colour = G.C.SECONDARY_SET.Acid}
 				end
 			end
 		end,
