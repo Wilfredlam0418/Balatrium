@@ -83,12 +83,12 @@ SMODS.Consumable {
 	config = {suit_conv = "Spades", max_highlighted = 1e100},
 	atlas = "element",
 	pos = {x = 0, y = 0},
-	loc_vars = function(self)
+	loc_vars = function(self, info_queue, card)
 		return {
 			vars = {
-				self.config.max_highighted,
-				localize(self.config.suit_conv, "suits_plural"),
-				colours = {G.C.SUITS[self.config.suit_conv]}
+				card.ability.max_highighted,
+				localize(card.ability.suit_conv, "suits_plural"),
+				colours = {G.C.SUITS[card.ability.suit_conv]}
 			}
 		}
 	end
@@ -105,12 +105,12 @@ if next(SMODS.find_mod("SixSuits")) then
 		config = {suit_conv = "six_Stars", max_highlighted = 1e100},
 		atlas = "other",
 		pos = {x = 0, y = 2},
-		loc_vars = function(self)
+		loc_vars = function(self, info_queue, card)
 			return {
 				vars = {
-					self.config.max_highighted,
-					localize(self.config.suit_conv, "suits_plural"),
-					colours = {G.C.SUITS[self.config.suit_conv]}
+					card.ability.max_highighted,
+					localize(card.ability.suit_conv, "suits_plural"),
+					colours = {G.C.SUITS[card.ability.suit_conv]}
 				}
 			}
 		end
@@ -123,12 +123,12 @@ if next(SMODS.find_mod("SixSuits")) then
 		config = {suit_conv = "six_Moons", max_highlighted = 1e100},
 		atlas = "other",
 		pos = {x = 1, y = 2},
-		loc_vars = function(self)
+		loc_vars = function(self, info_queue, card)
 			return {
 				vars = {
-					self.config.max_highighted,
-					localize(self.config.suit_conv, "suits_plural"),
-					colours = {G.C.SUITS[self.config.suit_conv]}
+					card.ability.max_highighted,
+					localize(card.ability.suit_conv, "suits_plural"),
+					colours = {G.C.SUITS[card.ability.suit_conv]}
 				}
 			}
 		end
@@ -141,8 +141,8 @@ SMODS.Consumable {
 	config = {max_highlighted = 2},
 	atlas = "element",
 	pos = {x = 18, y = 0},
-	loc_vars = function(self)
-		return {vars = {self.config.max_highlighted}}
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.max_highlighted}}
 	end,
 	use = function(self, card, area, copier)
 		local used_consumable = copier or card
@@ -183,7 +183,7 @@ SMODS.Consumable {
 SMODS.Consumable {
 	set = "Element",
 	key = "lithium",
-	config = {joker = "j_bium_battery"},
+	config = {extra = {joker = "j_bium_battery"}},
 	atlas = "element",
 	pos = {x = 0, y = 1},
 	loc_vars = function()
@@ -192,8 +192,8 @@ SMODS.Consumable {
 	can_use = function()
 		return true
 	end,
-	use = function(self)
-		SMODS.add_card({key = self.config.joker})
+	use = function(self, card)
+		SMODS.add_card({key = card.ability.extra.joker})
 	end
 }
 
@@ -203,31 +203,31 @@ SMODS.Consumable {
 	config = {extra = {money = 10}},
 	atlas = "element",
 	pos = {x = 1, y = 1},
-	loc_vars = function(self)
-		return {vars = {self.config.extra.money}}
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.money}}
 	end,
 	can_use = function()
 		return true
 	end,
-	use = function(self)
-		G.GAME.dollars = G.GAME.dollars + self.config.extra.money
+	use = function(self, card)
+		G.GAME.dollars = G.GAME.dollars + card.ability.extra.money
 	end
 }
 
 SMODS.Consumable {
 	set = "Element",
 	key = "boron",
-	config = {ante_decrease = 1},
+	config = {extra = {ante_decrease = 1}},
 	atlas = "element",
 	pos = {x = 13, y = 1},
-	loc_vars = function(self)
-		return {vars = {self.config.ante_decrease}}
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.ante_decrease}}
 	end,
 	can_use = function()
 		return true
 	end,
 	use = function(self)
-		ease_ante(-self.config.ante_decrease)
+		ease_ante(-card.ability.extra.ante_decrease)
 	end
 }
 
@@ -237,12 +237,12 @@ SMODS.Consumable {
 	config = {suit_conv = "Diamonds", max_highlighted = 1e100},
 	atlas = "element",
 	pos = {x = 14, y = 1},
-	loc_vars = function(self)
+	loc_vars = function(self, info_queue, card)
 		return {
 			vars = {
-				self.config.max_highighted,
-				localize(self.config.suit_conv, "suits_plural"),
-				colours = {G.C.SUITS[self.config.suit_conv]}
+				card.ability.max_highighted,
+				localize(card.ability.suit_conv, "suits_plural"),
+				colours = {G.C.SUITS[card.ability.suit_conv]}
 			}
 		}
 	end
@@ -254,12 +254,12 @@ SMODS.Consumable {
 	config = {suit_conv = "Hearts", max_highlighted = 1e100},
 	atlas = "element",
 	pos = {x = 15, y = 1},
-	loc_vars = function(self)
+	loc_vars = function(self, info_queue, card)
 		return {
 			vars = {
-				self.config.max_highighted,
-				localize(self.config.suit_conv, "suits_plural"),
-				colours = {G.C.SUITS[self.config.suit_conv]}
+				card.ability.max_highighted,
+				localize(card.ability.suit_conv, "suits_plural"),
+				colours = {G.C.SUITS[card.ability.suit_conv]}
 			}
 		}
 	end
@@ -271,12 +271,12 @@ SMODS.Consumable {
 	config = {suit_conv = "Clubs", max_highlighted = 1e100},
 	atlas = "element",
 	pos = {x = 16, y = 1},
-	loc_vars = function(self)
+	loc_vars = function(self, info_queue, card)
 		return {
 			vars = {
-				self.config.max_highighted,
-				localize(self.config.suit_conv, "suits_plural"),
-				colours = {G.C.SUITS[self.config.suit_conv]}
+				card.ability.max_highighted,
+				localize(card.ability.suit_conv, "suits_plural"),
+				colours = {G.C.SUITS[card.ability.suit_conv]}
 			}
 		}
 	end
@@ -285,19 +285,19 @@ SMODS.Consumable {
 SMODS.Consumable {
 	set = "Element",
 	key = "fluorine",
-	config = {type = "Acid"},
+	config = {extra = {type = "Acid"}},
 	atlas = "element",
 	pos = {x = 17, y = 1},
-	loc_vars = function(self)
-		return {vars = {self.config.type, colours = {G.C.SECONDARY_SET[self.config.type]}}}
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.type, colours = {G.C.SECONDARY_SET[card.ability.extra.type]}}}
 	end,
-	can_use = function(self)
+	can_use = function()
 		return true
 	end,
-	use = function(self)
-		local card = create_card(self.config.type, G.consumeables, nil, nil, true, true, nil, "bium_g17")
-		card:add_to_deck()
-		G.consumeables:emplace(card)
+	use = function(self, card)
+		local _card = create_card(card.ability.extra.type, G.consumeables, nil, nil, true, true)
+		_card:add_to_deck()
+		G.consumeables:emplace(_card)
 	end
 }
 
@@ -307,8 +307,8 @@ SMODS.Consumable {
 	config = {max_highlighted = 2},
 	atlas = "element",
 	pos = {x = 18, y = 1},
-	loc_vars = function(self)
-		return {vars = {self.config.max_highlighted}}
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.max_highlighted}}
 	end,
 	use = function(self, card, area, copier)
 		local used_consumable = copier or card
@@ -349,7 +349,7 @@ SMODS.Consumable {
 SMODS.Consumable {
 	set = "Element",
 	key = "sodium",
-	config = {joker = "j_bium_salt_cube"},
+	config = {extra = {joker = "j_bium_salt_cube"}},
 	atlas = "element",
 	pos = {x = 0, y = 2},
 	loc_vars = function()
@@ -358,8 +358,8 @@ SMODS.Consumable {
 	can_use = function()
 		return true
 	end,
-	use = function(self)
-		SMODS.add_card({key = self.config.joker})
+	use = function(self, card)
+		SMODS.add_card({key = card.ability.extra.joker})
 	end
 }
 
@@ -369,58 +369,58 @@ SMODS.Consumable {
 	config = {extra = {Xmoney = 1.5}},
 	atlas = "element",
 	pos = {x = 1, y = 2},
-	loc_vars = function(self)
-		return {vars = {self.config.extra.Xmoney}}
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.Xmoney}}
 	end,
 	can_use = function()
 		return true
 	end,
-	use = function(self)
-		G.GAME.dollars = G.GAME.dollars * self.config.extra.Xmoney
+	use = function(self, card)
+		G.GAME.dollars = G.GAME.dollars * card.ability.extra.Xmoney
 	end
 }
 
 SMODS.Consumable {
 	set = "Element",
 	key = "aluminum",
-	config = {ante_decrease = 1, discards = 1},
+	config = {extra = {ante_decrease = 1, discards = 1}},
 	atlas = "element",
 	pos = {x = 13, y = 2},
-	loc_vars = function(self)
-		return {vars = {self.config.ante_decrease, self.config.discards}}
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.ante_decrease, card.ability.extra.discards}}
 	end,
 	can_use = function()
 		return true
 	end,
-	use = function(self)
-		ease_ante(-self.config.ante_decrease)
-		G.GAME.round_resets.discards = G.GAME.round_resets.discards + self.config.discards
+	use = function(self, card)
+		ease_ante(-card.ability.ante_decrease)
+		G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.discards
 	end
 }
 
 SMODS.Consumable {
 	set = "Element",
 	key = "silicon",
-	config = {amount = 3, type = "Tarot"},
+	config = {extra = {amount = 3, type = "Tarot"}},
 	atlas = "element",
 	pos = {x = 14, y = 2},
-	loc_vars = function(self)
+	loc_vars = function(self, info_queue, card)
 		return {
 			vars = {
-				self.config.amount,
-				self.config.type,
-				colours = {G.C.SECONDARY_SET[self.config.type]}
+				card.ability.extra.amount,
+				card.ability.extra.type,
+				colours = {G.C.SECONDARY_SET[card.ability.extra.type]}
 			}
 		}
 	end,
-	can_use = function(self)
+	can_use = function()
 		return true
 	end,
-	use = function(self)
-		for i=1, self.config.amount, 1 do
-			local card = create_card(self.config.type, G.consumeables, nil, nil, true, true)
-			card:add_to_deck()
-			G.consumeables:emplace(card)
+	use = function(self, card)
+		for i=1, card.ability.amount, 1 do
+			local _card = create_card(card.ability.extra.type, G.consumeables, nil, nil, true, true)
+			_card:add_to_deck()
+			G.consumeables:emplace(_card)
 		end
 	end
 }
@@ -428,26 +428,26 @@ SMODS.Consumable {
 SMODS.Consumable {
 	set = "Element",
 	key = "phosphorus",
-	config = {amount = 2, type = "Joker"},
+	config = {extra = {amount = 2, type = "Joker"}},
 	atlas = "element",
 	pos = {x = 15, y = 2},
-	loc_vars = function(self)
+	loc_vars = function(self, info_queue, card)
 		return {
 			vars = {
-				self.config.amount,
-				self.config.type,
-				colours = {G.C.SECONDARY_SET[self.config.type]}
+				card.ability.amount,
+				card.ability.type,
+				colours = {G.C.SECONDARY_SET[card.ability.type]}
 			}
 		}
 	end,
-	can_use = function(self)
+	can_use = function()
 		return true
 	end,
-	use = function(self)
-		for i=1, self.config.amount, 1 do
-			local card = create_card(self.config.type, G.jokers, nil, nil, true, true)
-			card:add_to_deck()
-			G.jokers:emplace(card)
+	use = function(self, card)
+		for i=1, card.ability.amount, 1 do
+			local _card = create_card(card.ability.type, G.jokers, nil, nil, true, true)
+			_card:add_to_deck()
+			G.jokers:emplace(_card)
 		end
 	end
 }
@@ -455,16 +455,15 @@ SMODS.Consumable {
 SMODS.Consumable {
 	set = "Element",
 	key = "sulfur",
-	config = {},
 	atlas = "element",
 	pos = {x = 16, y = 2},
-	loc_vars = function(self)
+	loc_vars = function()
 		return {vars = {colours = {G.C.SECONDARY_SET.VOUCHER}}}
 	end,
-	can_use = function(self)
+	can_use = function()
 		return true
 	end,
-	use = function(self)
+	use = function()
 		local temp = G.GAME.current_round.voucher
 		local card = create_card("Voucher", G.redeemed_vouchers_during_hand, nil, nil, true, true)
 		card:start_materialize()
@@ -489,16 +488,16 @@ SMODS.Consumable {
 	config = {extra = {acidity = 2}},
 	atlas = "element",
 	pos = {x = 17, y = 2},
-	loc_vars = function(self)
+	loc_vars = function(self, info_queue, card)
 		return {vars = {self.config.extra.acidity}}
 	end,
-	can_use = function(self)
+	can_use = function()
 		return true
 	end,
-	use = function(self)
-		for i=1, #G.consumeables.cards, 1 do
-			if G.consumeables.cards[i]["ability"]["set"] == "Acid" then
-				G.consumeables.cards[i]["ability"]["acidity"] = G.consumeables.cards[i]["ability"]["acidity"] + self.config.extra.acidity
+	use = function(self, card)
+		for i=1, #G.consumeables.cards do
+			if G.consumeables.cards[i].ability.set == "Acid" then
+				G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 			end
 		end
 	end
@@ -510,8 +509,8 @@ SMODS.Consumable {
 	config = {max_highlighted = 2},
 	atlas = "element",
 	pos = {x = 18, y = 2},
-	loc_vars = function(self)
-		return {vars = {self.config.max_highlighted}}
+	loc_vars = function(self, card)
+		return {vars = {card.ability.max_highlighted}}
 	end,
 	use = function(self, card, area, copier)
 		local used_consumable = copier or card
@@ -552,17 +551,14 @@ SMODS.Consumable {
 SMODS.Consumable {
 	set = "Element",
 	key = "potassium",
-	config = {joker = "j_gros_michel"},
+	config = {extra = {joker = "j_gros_michel"}},
 	atlas = "element",
 	pos = {x = 0, y = 3},
-	loc_vars = function()
-		return {}
-	end,
 	can_use = function()
 		return true
 	end,
-	use = function(self)
-		SMODS.add_card({key = self.config.joker})
+	use = function(self, card)
+		SMODS.add_card({key = card.ability.extra.joker})
 	end
 }
 
@@ -572,42 +568,42 @@ SMODS.Consumable {
 	config = {extra = {money = 5, Xmoney = 1.25}},
 	atlas = "element",
 	pos = {x = 1, y = 3},
-	loc_vars = function(self)
-		return {vars = {self.config.extra.money, self.config.extra.Xmoney}}
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.money, card.ability.extra.Xmoney}}
 	end,
 	can_use = function()
 		return true
 	end,
-	use = function(self)
-		G.GAME.dollars = G.GAME.dollars + self.config.extra.money
-		G.GAME.dollars = G.GAME.dollars * self.config.extra.Xmoney
+	use = function(self, card)
+		ease_dollars(card.ability.extra.money)
+		ease_dollars(G.GAME.dollars * (card.ability.extra.Xmoney-1))
 	end
 }
 
 SMODS.Consumable {
 	set = "Spectral",
 	key = "balatrium",
-	config = {type = "Element"},
+	config = {extra = {type = "Element"}},
 	atlas = "other",
 	hidden = true,
 	soul_set = "Element",
 	pos = {x = 1, y = 0},
 	soul_pos = {x = 2, y = 0},
-	loc_vars = function(self)
+	loc_vars = function(self, info_queue, card)
 		return {
 			vars = {
-				self.config.type,
-				colours = {G.C.SECONDARY_SET[self.config.type]}
+				card.ability.type,
+				colours = {G.C.SECONDARY_SET[card.ability.extra.type]}
 			}
 		}
 	end,
 	can_use = function()
 		return true
 	end,
-	use = function(self)
-		for i=1, #G.P_CENTER_POOLS[self.config.type], 1 do
-			if G.P_CENTER_POOLS[self.config.type][i]["key"] ~= "c_bium_balatrium" and G.P_CENTER_POOLS[self.config.type][i]["key"] ~= "c_cry_pointer" and G.P_CENTER_POOLS[self.config.type][i]["discovered"] then
-				SMODS.add_card({key = G.P_CENTER_POOLS[self.config.type][i]["key"], edition = "e_negative"})
+	use = function(self, card)
+		for i=1, #G.P_CENTER_POOLS[card.abilitycard.ability.type] do
+			if G.P_CENTER_POOLS[card.ability.type][i].key ~= "c_bium_balatrium" and G.P_CENTER_POOLS[card.ability.type][i].key ~= "c_cry_pointer" and G.P_CENTER_POOLS[card.ability.type][i].discovered then
+				SMODS.add_card({key = G.P_CENTER_POOLS[card.ability.type][i].key, edition = "e_negative"})
 			end
 		end
 	end
@@ -625,10 +621,10 @@ SMODS.Consumable {
 	can_use = function(self, card)
 		return card.ability.acidity > 4
 	end,
-	use = function(self)
-		if self.config.acidity < 10 then
+	use = function(self, card)
+		if card.ability.acidity < 10 then
 			G.GAME.round_resets.discards = G.GAME.round_resets.discards + 1
-		elseif self.config.acidity < 15 then
+		elseif card.ability.acidity < 15 then
 			G.GAME.round_resets.hands = G.GAME.round_resets.hands + 1
 			G.GAME.round_resets.discards = G.GAME.round_resets.discards + 1
 		else
@@ -650,23 +646,24 @@ SMODS.Consumable {
 	can_use = function(self, card)
 		return card.ability.acidity > 9
 	end,
-	use = function(self)
-		if self.config.acidity < 20 then
-			for i=1, #G.consumeables.cards, 1 do
-				if G.consumeables.cards[i]["ability"]["set"] == "Acid" then
-					G.consumeables.cards[i]["ability"]["acidity"] = G.consumeables.cards[i]["ability"]["acidity"] + 2
+	use = function(self, card)
+		if card.ability.acidity < 20 then
+			for i=1, #G.consumeables.cards do
+				if G.consumeables.cards[i].ability.set == "Acid" then
+					G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + 2
 				end
 			end
-		elseif self.config.acidity < 30 then
-			for i=1, #G.consumeables.cards, 1 do
-				if G.consumeables.cards[i]["ability"]["set"] == "Acid" then
-					G.consumeables.cards[i]["ability"]["acidity"] = G.consumeables.cards[i]["ability"]["acidity"] + 4
+		elseif card.ability.acidity < 30 then
+			for i=1, #G.consumeables.cards do
+				if G.consumeables.cards[i].ability.set == "Acid" then
+					G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + 4
 				end
 			end
 		else
-			for i=1, #G.consumeables.cards, 1 do
-				if G.consumeables.cards[i]["ability"]["set"] == "Acid" then
-					G.consumeables.cards[i]["ability"]["acidity"] = G.consumeables.cards[i]["ability"]["acidity"] + 6
+			for i=1, #G.consumeables.cards do
+				if G.consumeables.cards[i].ability.set == "Acid" then
+					G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidityif G.consumeables.cards[i].ability.set == "Acid" then
+					G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + 6
 				end
 			end
 		end
@@ -686,12 +683,12 @@ SMODS.Consumable {
 		return card.ability.acidity > 4
 	end,
 	use = function(self)
-		if self.config.acidity < 15 then
-			G.GAME.dollars = G.GAME.dollars + 10
-		elseif self.config.acidity < 30 then
-			G.GAME.dollars = G.GAME.dollars + 20
+		if card.ability.acidity < 15 then
+			ease_dollars(10)
+		elseif card.ability.acidity < 30 then
+			ease_dollars(20)
 		else
-			G.GAME.dollars = G.GAME.dollars + 30
+			ease_dollars(30)
 		end
 	end
 }
@@ -702,15 +699,14 @@ end
 
 SMODS.Joker {
 	key = "battery",
-	config = {type = "Tarot", extra = {amount = 3, amount_mod = 1}},
+	config = {extra = {type = "Tarot", amount = 3, amount_mod = 1}},
 	pos = {x = 3, y = 0},
 	rarity = 2,
 	cost = 7,
 	eternal_compat = false,
 	atlas = "joker",
-	pools = {["Food"] = true},
 	loc_vars = function(self, info_queue, card)
-		return {vars = {card.ability.type, card.ability.extra.amount, card.ability.extra.amount_mod, colours = {G.C.SECONDARY_SET[card.ability.type]}}}
+		return {vars = {card.ability.extra.type, card.ability.extra.amount, card.ability.extra.amount_mod, colours = {G.C.SECONDARY_SET[card.ability.extra.type]}}}
 	end,
 	calculate = function(self, card, context)
 		if
@@ -720,8 +716,8 @@ SMODS.Joker {
 			and not context.repetition
 			and not context.retrigger_joker
 		then
-			for i=1, card.ability.extra.amount, 1 do
-				local card = create_card(card.ability.type, G.consumeables, nil, nil, true, true, nil, "bium_battery")
+			for i=1, card.ability.extra.amount do
+				local card = create_card(card.ability.type, G.consumeables, nil, nil, true, true)
 				card:add_to_deck()
 				G.consumeables:emplace(card)
 			end
@@ -820,12 +816,12 @@ SMODS.Joker {
 	rarity = 1,
 	cost = 4,
 	atlas = "joker",
-	loc_vars = function(self)
-		return {vars = {self.config.extra.mult}}
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.mult}}
 	end,
 	calculate = function(self, card, context)
 		if context.individual and context.cardarea == G.play then
-			return {message = localize({type = "variable", key = "a_mult", vars = {card.ability.extra.mult}}), mult_mod = card.ability.extra.mult}
+			return {mult_mod = card.ability.extra.mult}
 		end
 	end
 }
@@ -837,12 +833,12 @@ SMODS.Joker {
 	rarity = 2,
 	cost = 6,
 	atlas = "joker",
-	loc_vars = function(self)
-		return {vars = {self.config.extra.xmult}}
+	loc_vars = function(self, card)
+		return {vars = {card.ability.extra.xmult}}
 	end,
 	calculate = function(self, card, context)
 		if context.individual and context.cardarea == G.play then
-			return {message = localize({type = "variable", key = "a_xmult", vars = {card.ability.extra.xmult}}), mult_mod = card.ability.extra.xmult}
+			return {Xmult_mod = card.ability.extra.xmult}
 		end
 	end
 }
@@ -854,8 +850,8 @@ SMODS.Joker {
 	rarity = 1,
 	cost = 4,
 	atlas = "joker",
-	loc_vars = function(self)
-		return {vars = {self.config.extra.chips}}
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.chips}}
 	end,
 	calculate = function(self, card, context)
 		if context.individual and context.cardarea == G.play then
@@ -870,20 +866,20 @@ end
 
 SMODS.Joker {
 	key = "exuberant",
-	config = {acidity = 1, type = "Pair"},
+	config = {extra = {acidity = 1, type = "Pair"}},
 	pos = { x = 0, y = 0 },
 	rarity = 1,
 	cost = 4,
 	atlas = "acidjokers",
-	loc_vars = function(self)
-		return {vars = {self.config.acidity}}
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.acidity}}
 	end,
 	calculate = function(self, card, context)
 		if context.joker_main then
-			if context.poker_hands ~= nil and (next(context.poker_hands[self.config.type])) then
+			if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
 				for i=1, #G.consumeables.cards, 1 do
-					if G.consumeables.cards[i]["ability"]["set"] == "Acid" then
-						G.consumeables.cards[i]["ability"]["acidity"] = G.consumeables.cards[i]["ability"]["acidity"] + self.config.acidity
+					if G.consumeables.cards[i].ability.set == "Acid" then
+						G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 					end
 				end
 				return {message = acidity_increase, colour = G.C.SECONDARY_SET.Acid}
@@ -894,20 +890,20 @@ SMODS.Joker {
 
 SMODS.Joker {
 	key = "exultant",
-	config = {acidity = 1.5, type = "Three of a Kind"},
+	config = {extra = {acidity = 1.5, type = "Three of a Kind"}},
 	pos = { x = 1, y = 0 },
 	rarity = 1,
 	cost = 4,
 	atlas = "acidjokers",
-	loc_vars = function(self)
-		return {vars = {self.config.acidity}}
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.acidity}}
 	end,
 	calculate = function(self, card, context)
 		if context.joker_main then
-			if context.poker_hands ~= nil and (next(context.poker_hands[self.config.type])) then
+			if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
 				for i=1, #G.consumeables.cards, 1 do
-					if G.consumeables.cards[i]["ability"]["set"] == "Acid" then
-						G.consumeables.cards[i]["ability"]["acidity"] = G.consumeables.cards[i]["ability"]["acidity"] + self.config.acidity
+					if G.consumeables.cards[i].ability.set == "Acid" then
+						G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 					end
 				end
 				return {message = acidity_increase, colour = G.C.SECONDARY_SET.Acid}
@@ -918,20 +914,20 @@ SMODS.Joker {
 
 SMODS.Joker {
 	key = "rapturous",
-	config = {acidity = 1.5, type = "Two Pair"},
+	config = {extra = {acidity = 1.5, type = "Two Pair"}},
 	pos = { x = 2, y = 0 },
 	rarity = 1,
 	cost = 4,
 	atlas = "acidjokers",
-	loc_vars = function(self)
-		return {vars = {self.config.acidity}}
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.acidity}}
 	end,
 	calculate = function(self, card, context)
 		if context.joker_main then
-			if context.poker_hands ~= nil and (next(context.poker_hands[self.config.type])) then
+			if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
 				for i=1, #G.consumeables.cards, 1 do
-					if G.consumeables.cards[i]["ability"]["set"] == "Acid" then
-						G.consumeables.cards[i]["ability"]["acidity"] = G.consumeables.cards[i]["ability"]["acidity"] + self.config.acidity
+					if G.consumeables.cards[i].ability.set == "Acid" then
+						G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 					end
 				end
 				return {message = acidity_increase, colour = G.C.SECONDARY_SET.Acid}
@@ -942,20 +938,20 @@ SMODS.Joker {
 
 SMODS.Joker {
 	key = "blithe",
-	config = {acidity = 1.5, type = "Straight"},
+	config = {extra = {acidity = 1.5, type = "Straight"}},
 	pos = { x = 3, y = 0 },
 	rarity = 1,
 	cost = 4,
 	atlas = "acidjokers",
-	loc_vars = function(self)
-		return {vars = {self.config.acidity}}
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.acidity}}
 	end,
 	calculate = function(self, card, context)
 		if context.joker_main then
-			if context.poker_hands ~= nil and (next(context.poker_hands[self.config.type])) then
+			if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
 				for i=1, #G.consumeables.cards, 1 do
-					if G.consumeables.cards[i]["ability"]["set"] == "Acid" then
-						G.consumeables.cards[i]["ability"]["acidity"] = G.consumeables.cards[i]["ability"]["acidity"] + self.config.acidity
+					if G.consumeables.cards[i].ability.set == "Acid" then
+						G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 					end
 				end
 				return {message = acidity_increase, colour = G.C.SECONDARY_SET.Acid}
@@ -966,20 +962,20 @@ SMODS.Joker {
 
 SMODS.Joker {
 	key = "ecstatic",
-	config = {acidity = 1, type = "Flush"},
+	config = {extra = {acidity = 1, type = "Flush"}},
 	pos = { x = 4, y = 0 },
 	rarity = 1,
 	cost = 4,
 	atlas = "acidjokers",
-	loc_vars = function(self)
-		return {vars = {self.config.acidity}}
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.acidity}}
 	end,
 	calculate = function(self, card, context)
 		if context.joker_main then
-			if context.poker_hands ~= nil and (next(context.poker_hands[self.config.type])) then
+			if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
 				for i=1, #G.consumeables.cards, 1 do
-					if G.consumeables.cards[i]["ability"]["set"] == "Acid" then
-						G.consumeables.cards[i]["ability"]["acidity"] = G.consumeables.cards[i]["ability"]["acidity"] + self.config.acidity
+					if G.consumeables.cards[i].ability.set == "Acid" then
+						G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 					end
 				end
 				return {message = acidity_increase, colour = G.C.SECONDARY_SET.Acid}
@@ -992,7 +988,7 @@ function numbers_to_word(numbers)
 	numbers_to_word_letters = "abcdefghijklmnopqrstuvwxyz"
 	numbers_to_word_string = ""
 	for i=1, #numbers, 1 do
-		numbers_to_word_string = numbers_to_word_string .. numbers_to_word_letters.sub(numbers_to_word_letters, numbers[i], numbers[i])
+		numbers_to_word_string = numbers_to_word_string .. (numbers_to_word_letters.sub(numbers_to_word_letters, numbers[i], numbers[i]) or "")
 	end
 	return numbers_to_word_string
 end
@@ -1000,20 +996,20 @@ end
 if next(SMODS.find_mod("Cryptid")) then
 	SMODS.Joker {
 		key = "thrilled",
-		config = {acidity = 0.5, type = "High Card"},
+		config = {extra = {acidity = 0.5, type = "High Card"}},
 		pos = { x = 0, y = 1 },
 		rarity = 1,
 		cost = 4,
 		atlas = "acidjokers",
-		loc_vars = function(self)
-			return {vars = {self.config.acidity}}
+		loc_vars = function(self, info_queue, card)
+			return {vars = {card.ability.acidity}}
 		end,
 		calculate = function(self, card, context)
 			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[self.config.type])) then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
 					for i=1, #G.consumeables.cards, 1 do
-						if G.consumeables.cards[i]["ability"]["set"] == "Acid" then
-							G.consumeables.cards[i]["ability"]["acidity"] = G.consumeables.cards[i]["ability"]["acidity"] + self.config.acidity
+						if G.consumeables.cards[i].ability.set == "Acid" then
+							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 						end
 					end
 					return {message = acidity_increase, colour = G.C.SECONDARY_SET.Acid}
@@ -1024,20 +1020,20 @@ if next(SMODS.find_mod("Cryptid")) then
 
 	SMODS.Joker {
 		key = "enlivened",
-		config = {acidity = 2, type = "Four of a Kind"},
+		config = {extra = {acidity = 2, type = "Four of a Kind"}},
 		pos = { x = 1, y = 1 },
 		rarity = 1,
 		cost = 4,
 		atlas = "acidjokers",
-		loc_vars = function(self)
-			return {vars = {self.config.acidity}}
+		loc_vars = function(self, info_queue, card)
+			return {vars = {card.ability.acidity}}
 		end,
 		calculate = function(self, card, context)
 			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[self.config.type])) then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
 					for i=1, #G.consumeables.cards, 1 do
-						if G.consumeables.cards[i]["ability"]["set"] == "Acid" then
-							G.consumeables.cards[i]["ability"]["acidity"] = G.consumeables.cards[i]["ability"]["acidity"] + self.config.acidity
+						if G.consumeables.cards[i].ability.set == "Acid" then
+							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 						end
 					end
 					return {message = acidity_increase, colour = G.C.SECONDARY_SET.Acid}
@@ -1048,20 +1044,20 @@ if next(SMODS.find_mod("Cryptid")) then
 
 	SMODS.Joker {
 		key = "enthusiastic",
-		config = {acidity = 2.5, type = "Straight Flush"},
+		config = {extra = {acidity = 2.5, type = "Straight Flush"}},
 		pos = { x = 2, y = 1 },
 		rarity = 1,
 		cost = 4,
 		atlas = "acidjokers",
-		loc_vars = function(self)
-			return {vars = {self.config.acidity}}
+		loc_vars = function(self, info_queue, card)
+			return {vars = {card.ability.acidity}}
 		end,
 		calculate = function(self, card, context)
 			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[self.config.type])) then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
 					for i=1, #G.consumeables.cards, 1 do
-						if G.consumeables.cards[i]["ability"]["set"] == "Acid" then
-							G.consumeables.cards[i]["ability"]["acidity"] = G.consumeables.cards[i]["ability"]["acidity"] + self.config.acidity
+						if G.consumeables.cards[i].ability.set == "Acid" then
+							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 						end
 					end
 					return {message = acidity_increase, colour = G.C.SECONDARY_SET.Acid}
@@ -1072,20 +1068,20 @@ if next(SMODS.find_mod("Cryptid")) then
 
 	SMODS.Joker {
 		key = "delighted",
-		config = {acidity = 2, type = "Full House"},
+		config = {extra = {acidity = 2, type = "Full House"}},
 		pos = { x = 3, y = 1 },
 		rarity = 1,
 		cost = 4,
 		atlas = "acidjokers",
-		loc_vars = function(self)
-			return {vars = {self.config.acidity}}
+		loc_vars = function(self, info_queue, card)
+			return {vars = {card.ability.acidity}}
 		end,
 		calculate = function(self, card, context)
 			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[self.config.type])) then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
 					for i=1, #G.consumeables.cards, 1 do
-						if G.consumeables.cards[i]["ability"]["set"] == "Acid" then
-							G.consumeables.cards[i]["ability"]["acidity"] = G.consumeables.cards[i]["ability"]["acidity"] + self.config.acidity
+						if G.consumeables.cards[i].ability.set == "Acid" then
+							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 						end
 					end
 					return {message = acidity_increase, colour = G.C.SECONDARY_SET.Acid}
@@ -1096,20 +1092,20 @@ if next(SMODS.find_mod("Cryptid")) then
 
 	SMODS.Joker {
 		key = "adrenalized",
-		config = {acidity = 2.5, type = "Five of a Kind"},
+		config = {extra = {acidity = 2.5, type = "Five of a Kind"}},
 		pos = { x = 4, y = 1 },
 		rarity = 1,
 		cost = 4,
 		atlas = "acidjokers",
-		loc_vars = function(self)
-			return {vars = {self.config.acidity}}
+		loc_vars = function(self, info_queue, card)
+			return {vars = {card.ability.acidity}}
 		end,
 		calculate = function(self, card, context)
 			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[self.config.type])) then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
 					for i=1, #G.consumeables.cards, 1 do
-						if G.consumeables.cards[i]["ability"]["set"] == "Acid" then
-							G.consumeables.cards[i]["ability"]["acidity"] = G.consumeables.cards[i]["ability"]["acidity"] + self.config.acidity
+						if G.consumeables.cards[i].ability.set == "Acid" then
+							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 						end
 					end
 					return {message = acidity_increase, colour = G.C.SECONDARY_SET.Acid}
@@ -1126,20 +1122,20 @@ if next(SMODS.find_mod("Cryptid")) then
 
 	SMODS.Joker {
 		key = "astonishing",
-		config = {acidity = 4.5, type = "Flush House"},
+		config = {extra = {acidity = 4.5, type = "Flush House"}},
 		pos = { x = 0, y = 2 },
 		rarity = 1,
 		cost = 4,
 		atlas = "acidjokers",
-		loc_vars = function(self)
-			return {vars = {self.config.acidity}}
+		loc_vars = function(self, info_queue, card)
+			return {vars = {card.ability.acidity}}
 		end,
 		calculate = function(self, card, context)
 			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[self.config.type])) then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
 					for i=1, #G.consumeables.cards, 1 do
-						if G.consumeables.cards[i]["ability"]["set"] == "Acid" then
-							G.consumeables.cards[i]["ability"]["acidity"] = G.consumeables.cards[i]["ability"]["acidity"] + self.config.acidity
+						if G.consumeables.cards[i].ability.set == "Acid" then
+							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.aciditycard.ability.extra.acidity
 						end
 					end
 					return {message = acidity_increase, colour = G.C.SECONDARY_SET.Acid}
@@ -1156,20 +1152,20 @@ if next(SMODS.find_mod("Cryptid")) then
 
 	SMODS.Joker {
 		key = "staggering",
-		config = {acidity = 4.5, type = "Flush Five"},
+		config = {extra = {acidity = 4.5, type = "Flush Five"}},
 		pos = { x = 1, y = 2 },
 		rarity = 1,
 		cost = 4,
 		atlas = "acidjokers",
-		loc_vars = function(self)
-			return {vars = {self.config.acidity}}
+		loc_vars = function(self, info_queue, card)
+			return {vars = {card.ability.acidity}}
 		end,
 		calculate = function(self, card, context)
 			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[self.config.type])) then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
 					for i=1, #G.consumeables.cards, 1 do
-						if G.consumeables.cards[i]["ability"]["set"] == "Acid" then
-							G.consumeables.cards[i]["ability"]["acidity"] = G.consumeables.cards[i]["ability"]["acidity"] + self.config.acidity
+						if G.consumeables.cards[i].ability.set == "Acid" then
+							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 						end
 					end
 					return {message = acidity_increase, colour = G.C.SECONDARY_SET.Acid}
@@ -1186,20 +1182,20 @@ if next(SMODS.find_mod("Cryptid")) then
 
 	SMODS.Joker {
 		key = "extraordinary",
-		config = {acidity = 2.5, type = "cry_Bulwark"},
+		config = {extra = {acidity = 2.5, type = "cry_Bulwark"}},
 		pos = { x = 2, y = 2 },
 		rarity = 1,
 		cost = 4,
 		atlas = "acidjokers",
-		loc_vars = function(self)
-			return {vars = {self.config.acidity}}
+		loc_vars = function(self, info_queue, card)
+			return {vars = {card.ability.acidity}}
 		end,
 		calculate = function(self, card, context)
 			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[self.config.type])) then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
 					for i=1, #G.consumeables.cards, 1 do
-						if G.consumeables.cards[i]["ability"]["set"] == "Acid" then
-							G.consumeables.cards[i]["ability"]["acidity"] = G.consumeables.cards[i]["ability"]["acidity"] + self.config.acidity
+						if G.consumeables.cards[i].ability.set == "Acid" then
+							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 						end
 					end
 					return {message = acidity_increase, colour = G.C.SECONDARY_SET.Acid}
@@ -1216,20 +1212,20 @@ if next(SMODS.find_mod("Cryptid")) then
 
 	SMODS.Joker {
 		key = "perplexing",
-		config = {acidity = 5, type = "cry_Cluster" .. numbers_to_word({6, 21, 3, 11})},
+		config = {extra = {acidity = 5, type = "cry_Cluster" .. numbers_to_word({6, 21, 3, 11})}},
 		pos = { x = 3, y = 2 },
 		rarity = 1,
 		cost = 4,
 		atlas = "acidjokers",
-		loc_vars = function(self)
-			return {vars = {self.config.acidity}}
+		loc_vars = function(self, info_queue, card)
+			return {vars = {card.ability.acidity}}
 		end,
 		calculate = function(self, card, context)
 			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[self.config.type])) then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
 					for i=1, #G.consumeables.cards, 1 do
-						if G.consumeables.cards[i]["ability"]["set"] == "Acid" then
-							G.consumeables.cards[i]["ability"]["acidity"] = G.consumeables.cards[i]["ability"]["acidity"] + self.config.acidity
+						if G.consumeables.cards[i].ability.set == "Acid" then
+							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 						end
 					end
 					return {message = acidity_increase, colour = G.C.SECONDARY_SET.Acid}
@@ -1246,20 +1242,20 @@ if next(SMODS.find_mod("Cryptid")) then
 
 	SMODS.Joker {
 		key = "spectacular",
-		config = {acidity = 6, type = "cry_UltPair"},
+		config = {extra = {acidity = 6, type = "cry_UltPair"}},
 		pos = { x = 4, y = 2 },
 		rarity = 1,
 		cost = 4,
 		atlas = "acidjokers",
-		loc_vars = function(self)
-			return {vars = {self.config.acidity}}
+		loc_vars = function(self, info_queue, card)
+			return {vars = {card.ability.acidity}}
 		end,
 		calculate = function(self, card, context)
 			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[self.config.type])) then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
 					for i=1, #G.consumeables.cards, 1 do
-						if G.consumeables.cards[i]["ability"]["set"] == "Acid" then
-							G.consumeables.cards[i]["ability"]["acidity"] = G.consumeables.cards[i]["ability"]["acidity"] + self.config.acidity
+						if G.consumeables.cards[i].ability.set == "Acid" then
+							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
 						end
 					end
 					return {message = acidity_increase, colour = G.C.SECONDARY_SET.Acid}
@@ -1283,7 +1279,7 @@ SMODS.Booster {
 	group_key = "k_bium_atomic_pack",
 	draw_hand = true,
 	create_card = function(self, card)
-		local card = create_card("Element", G.pack_cards, nil, nil, true, true, nil, "bium_element")
+		local card = create_card("Element", G.pack_cards, nil, nil, true, true)
 		return card
 	end,
 	pos = {x = 0, y = 0},
@@ -1311,7 +1307,7 @@ SMODS.Booster {
 	group_key = "k_bium_atomic_pack",
 	draw_hand = true,
 	create_card = function(self, card)
-		local card = create_card("Element", G.pack_cards, nil, nil, true, true, nil, "bium_element")
+		local card = create_card("Element", G.pack_cards, nil, nil, true, true)
 		return card
 	end,
 	pos = {x = 1, y = 0},
@@ -1339,7 +1335,7 @@ SMODS.Booster {
 	group_key = "k_bium_atomic_pack",
 	draw_hand = true,
 	create_card = function(self, card)
-		local card = create_card("Element", G.pack_cards, nil, nil, true, true, nil, "bium_element")
+		local card = create_card("Element", G.pack_cards, nil, nil, true, true, nil)
 		return card
 	end,
 	pos = {x = 2, y = 0},
@@ -1367,7 +1363,7 @@ SMODS.Booster {
 	group_key = "k_bium_atomic_pack",
 	draw_hand = true,
 	create_card = function(self, card)
-		local card = create_card("Element", G.pack_cards, nil, nil, true, true, nil, "bium_element")
+		local card = create_card("Element", G.pack_cards, nil, nil, true, true, nil)
 		return card
 	end,
 	pos = {x = 3, y = 0},
