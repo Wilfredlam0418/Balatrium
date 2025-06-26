@@ -101,8 +101,8 @@ return {
 				name = "Nullified Joker",
 				text = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand is", "a {C:attention}None"}
 			},
-			j_bium_spectacular = {
-				name = "Transcendent Joker",
+			j_bium_transcendent = {
+				name = "The Powerful Card That Most People May Call a \"Very Transcendent\" Joker",
 				text = {"Multiply the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand contains", "{C:attention}The Entire Deck"}
 			}
 		},
