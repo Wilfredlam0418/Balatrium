@@ -4,7 +4,7 @@ A Balatro mod that add chemical elements.
 Includes:
 * 20 Element cards
 * 3 Acid cards
-* 10 Jokers
+* 11 Jokers
 * 1 Spectral card
 
 Future plans:
@@ -12,3 +12,5 @@ Future plans:
 * More Jokers
 * Card modifiers
 * A completely new Tablet mechanic
+
+There are more jokers with other mods.
