@@ -7,6 +7,7 @@ Salt Cube: Cryptid (Scaling copied from Chili Pepper), ExampleJokersMod (Steamod
 Proton: None
 Neutron: None
 Electron: None
+Systematic Element Name: None
 Exuberant Joker: Cryptid (Hand check copied from The Duos), Six Suits (Badge copied from Exoplanet)
 Exultant Joker: Cryptid (Hand check copied from The Duos), Six Suits (Badge copied from Exoplanet)
 Rapturous Joker: Cryptid (Hand check copied from The Duos), Six Suits (Badge copied from Exoplanet)
@@ -43,7 +44,7 @@ Fluorine: None
 Neon: Cryptid (Copied from Replica)
 Sodium: None
 Magnesium: None
-Aluminum: POLTERWORX (Discard bonus copied from Sorrow)
+Aluminum: POLTERWORX (Discontinued mod, discard bonus copied from Sorrow)
 Silicon: None
 Phosphorus: None
 Sulfur: Cryptid (Copied from Trade)
@@ -53,7 +54,7 @@ Potassium: None
 Calcium: None
 
 = Acid Cards =
-Hydrofluoric Acid: POLTERWORX (Copied from Solace and Sorrow)
+Hydrofluoric Acid: POLTERWORX (Discontinued mod, copied from Solace and Sorrow)
 Hydrochloric Acid: None
 Hydrobromic Acid: None
 
