@@ -39,71 +39,71 @@ return {
 			},
 			j_bium_exuberant = {
 				name = "Exuberant Joker",
-				text = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand contains", "a {C:attention}Pair"}
+				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Pair"}
 			},
 			j_bium_exultant = {
 				name = "Exultant Joker",
-				text = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand contains", "a {C:attention}Three of a Kind"}
+				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Three of a Kind"}
 			},
 			j_bium_rapturous = {
 				name = "Rapturous Joker",
-				text = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand contains", "a {C:attention}Two Pair"}
+				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Two Pair"}
 			},
 			j_bium_blithe = {
 				name = "Blithe Joker",
-				text = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand contains", "a {C:attention}Straight"}
+				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Straight"}
 			},
 			j_bium_ecstatic = {
 				name = "Ecstatic Joker",
-				text = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand contains", "a {C:attention}Flush"}
+				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Flush"}
 			},
 			j_bium_thrilled = {
 				name = "Thrilled Joker",
-				text = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand contains", "a {C:attention}High Card"}
+				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}High Card"}
 			},
 			j_bium_enlivened = {
 				name = "Enlivened Joker",
-				text = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand contains", "a {C:attention}Four of a Kind"}
+				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Four of a Kind"}
 			},
 			j_bium_enthusiastic = {
 				name = "Enthusiastic Joker",
-				text = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand contains", "a {C:attention}Straight Flush"}
+				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Straight Flush"}
 			},
 			j_bium_delighted = {
 				name = "Delighted Joker",
-				text = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand contains", "a {C:attention}Full House"}
+				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Full House"}
 			},
 			j_bium_adrenalized = {
 				name = "Adrenalized Joker",
-				text = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand contains", "a {C:attention}Five of a Kind"}
+				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Five of a Kind"}
 			},
 			j_bium_astonishing = {
 				name = "Astonishing Joker",
-				text = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand contains", "a {C:attention}Flush House"}
+				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Flush House"}
 			},
 			j_bium_staggering = {
 				name = "Staggering Joker",
-				text = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand contains", "a {C:attention}Flush Five"}
+				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Flush Five"}
 			},
 			j_bium_extraordinary = {
 				name = "Extraordinary Joker",
-				text = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand contains", "a {C:attention}Bulwark"}
+				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Bulwark"}
 			},
 			j_bium_perplexing = {
 				name = "Perplexing Joker",
-				text = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand contains", "a {C:attention}Cluster"}
+				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Cluster"}
 			},
 			j_bium_spectacular = {
 				name = "Spectacular Joker",
-				text = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand contains", "an {C:attention}Ultimate Pair"}
+				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "an {C:attention}Ultimate Pair"}
 			},
 			j_bium_nullified = {
 				name = "Nullified Joker",
-				text = {"Increase the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand is", "a {C:attention}None"}
+				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand is", "a {C:attention}None"}
 			},
 			j_bium_transcendent = {
 				name = "The Powerful Card That Most People May Call a \"Very Transcendent\" Joker",
-				text = {"Multiply the {C:acid}Acidity{} of all {C:acid}Acids", "by {C:attention}#1#{} if played hand contains", "{C:attention}The Entire Deck"}
+				text = {"{X:acid,C:white}X#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "{C:attention}The Entire Deck"}
 			}
 		},
 		Spectral = {
