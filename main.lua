@@ -662,7 +662,6 @@ SMODS.Consumable {
 		else
 			for i=1, #G.consumeables.cards do
 				if G.consumeables.cards[i].ability.set == "Acid" then
-					G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidityif G.consumeables.cards[i].ability.set == "Acid" then
 					G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + 6
 				end
 			end
