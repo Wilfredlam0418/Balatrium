@@ -14,3 +14,5 @@ Future plans:
 * A completely new Tablet mechanic
 
 There are more jokers with other mods.
+
+**Note:** I do not playtest this mod. Please create an issue if the game crashes or any bugs are found.
