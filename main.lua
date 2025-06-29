@@ -509,7 +509,7 @@ SMODS.Consumable {
 	config = {max_highlighted = 2},
 	atlas = "element",
 	pos = {x = 18, y = 2},
-	loc_vars = function(self, card)
+	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.max_highlighted}}
 	end,
 	use = function(self, card, area, copier)
