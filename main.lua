@@ -434,9 +434,9 @@ SMODS.Consumable {
 	loc_vars = function(self, info_queue, card)
 		return {
 			vars = {
-				card.ability.amount,
-				card.ability.type,
-				colours = {G.C.SECONDARY_SET[card.ability.type]}
+				card.ability.extra.amount,
+				card.ability.extra.type,
+				colours = {G.C.SECONDARY_SET[card.ability.extra.type]}
 			}
 		}
 	end,
@@ -702,18 +702,20 @@ SMODS.Joker {
 	pos = {x = 3, y = 0},
 	rarity = 2,
 	cost = 7,
-	eternal_compat = false,
+	blueprint_compat = true,
+	demicoloncompat = true,
 	atlas = "joker",
 	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.extra.type, card.ability.extra.amount, card.ability.extra.amount_mod, colours = {G.C.SECONDARY_SET[card.ability.extra.type]}}}
 	end,
 	calculate = function(self, card, context)
 		if
-			context.end_of_round
+			(context.end_of_round
 			and not context.blueprint
 			and not context.individual
 			and not context.repetition
-			and not context.retrigger_joker
+			and not context.retrigger_joker)
+			or context.forcetrigger
 		then
 			for i=1, card.ability.extra.amount do
 				local card = create_card(card.ability.type, G.consumeables, nil, nil, true, true)
@@ -758,6 +760,8 @@ SMODS.Joker {
 	pos = {x = 0, y = 0},
 	rarity = 1,
 	cost = 4,
+	blueprint_compat = true,
+	demicoloncompat = true,
 	eternal_compat = false,
 	atlas = "joker",
 	pools = {["Food"] = true},
@@ -770,11 +774,12 @@ SMODS.Joker {
 	end,
 	calculate = function(self, card, context)
 		if
-			context.end_of_round
+			(context.end_of_round
 			and not context.blueprint
 			and not context.individual
 			and not context.repetition
-			and not context.retrigger_joker
+			and not context.retrigger_joker)
+			or context.forcetrigger
 		then
 			card.ability.extra.money = card.ability.extra.money - card.ability.extra.money_mod
 			if card.ability.extra.money <= 0 then
@@ -805,6 +810,7 @@ SMODS.Joker {
 				}
 			end
 		end
+		if context.forcetrigger then ease_dollars(card.ability.extra.money) end
 	end
 }
 
@@ -814,12 +820,14 @@ SMODS.Joker {
 	pos = {x = 1, y = 1},
 	rarity = 1,
 	cost = 4,
+	blueprint_compat = true,
+	demicoloncompat = true,
 	atlas = "joker",
 	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.extra.mult}}
 	end,
 	calculate = function(self, card, context)
-		if context.individual and context.cardarea == G.play then
+		if (context.individual and context.cardarea == G.play) or context.forcetrigger then
 			return {mult_mod = card.ability.extra.mult}
 		end
 	end
@@ -831,12 +839,14 @@ SMODS.Joker {
 	pos = {x = 2, y = 1},
 	rarity = 2,
 	cost = 6,
+	blueprint_compat = true,
+	demicoloncompat = true,
 	atlas = "joker",
-	loc_vars = function(self, card)
+	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.extra.xmult}}
 	end,
 	calculate = function(self, card, context)
-		if context.individual and context.cardarea == G.play then
+		if (context.individual and context.cardarea == G.play) or context.forcetrigger then
 			return {Xmult_mod = card.ability.extra.xmult}
 		end
 	end
@@ -853,7 +863,7 @@ SMODS.Joker {
 		return {vars = {card.ability.extra.chips}}
 	end,
 	calculate = function(self, card, context)
-		if context.individual and context.cardarea == G.play then
+		if (context.individual and context.cardarea == G.play) or context.forcetrigger then
 			return {message = localize({type = "variable", key = "a_chips", vars = {card.ability.extra.chips}}), chip_mod = card.ability.extra.chips}
 		end
 	end
@@ -865,19 +875,21 @@ SMODS.Joker {
 	pos = {x = 0, y = 1},
 	rarity = 2,
 	cost = 5,
+	blueprint_compat = true,
+	demicoloncompat = true,
 	atlas = "joker",
-	loc_vars = function(self)
+	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.extra.mult}}
 	end,
 	calculate = function(self, card, context)
-		if context.joker_main then
+		if context.joker_main or context.forcetrigger then
 			local letter_count = 0
 			for i=1, #G.play.cards do
 				if G.play.cards[i]:get_id() > 10 then
 					letter_count = letter_count + 1
 				end
 			end
-			if letter_count == 3 then
+			if letter_count == 3 or context.forcetrigger then
 				return {mult_mod = card.ability.extra.mult}
 			end
 		end
@@ -894,13 +906,15 @@ SMODS.Joker {
 	pos = { x = 0, y = 0 },
 	rarity = 1,
 	cost = 4,
+	blueprint_compat = true,
+	demicoloncompat = true,
 	atlas = "acidjokers",
 	loc_vars = function(self, info_queue, card)
-		return {vars = {card.ability.acidity}}
+		return {vars = {card.ability.extra.acidity}}
 	end,
 	calculate = function(self, card, context)
-		if context.joker_main then
-			if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
+		if context.joker_main or context.forcetrigger then
+			if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.extra.type])) then
 				for i=1, #G.consumeables.cards do
 					if G.consumeables.cards[i].ability.set == "Acid" then
 						G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
@@ -918,13 +932,15 @@ SMODS.Joker {
 	pos = { x = 1, y = 0 },
 	rarity = 1,
 	cost = 4,
+	blueprint_compat = true,
+	demicoloncompat = true,
 	atlas = "acidjokers",
 	loc_vars = function(self, info_queue, card)
-		return {vars = {card.ability.acidity}}
+		return {vars = {card.ability.extra.acidity}}
 	end,
 	calculate = function(self, card, context)
-		if context.joker_main then
-			if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
+		if context.joker_main or context.forcetrigger then
+			if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.extra.type])) then
 				for i=1, #G.consumeables.cards do
 					if G.consumeables.cards[i].ability.set == "Acid" then
 						G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
@@ -942,13 +958,15 @@ SMODS.Joker {
 	pos = { x = 2, y = 0 },
 	rarity = 1,
 	cost = 4,
+	blueprint_compat = true,
+	demicoloncompat = true,
 	atlas = "acidjokers",
 	loc_vars = function(self, info_queue, card)
-		return {vars = {card.ability.acidity}}
+		return {vars = {card.ability.extra.acidity}}
 	end,
 	calculate = function(self, card, context)
-		if context.joker_main then
-			if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
+		if context.joker_main or context.forcetrigger then
+			if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.extra.type])) then
 				for i=1, #G.consumeables.cards do
 					if G.consumeables.cards[i].ability.set == "Acid" then
 						G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
@@ -966,13 +984,15 @@ SMODS.Joker {
 	pos = { x = 3, y = 0 },
 	rarity = 1,
 	cost = 4,
+	blueprint_compat = true,
+	demicoloncompat = true,
 	atlas = "acidjokers",
 	loc_vars = function(self, info_queue, card)
-		return {vars = {card.ability.acidity}}
+		return {vars = {card.ability.extra.acidity}}
 	end,
 	calculate = function(self, card, context)
-		if context.joker_main then
-			if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
+		if context.joker_main or context.forcetrigger then
+			if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.extra.type])) then
 				for i=1, #G.consumeables.cards do
 					if G.consumeables.cards[i].ability.set == "Acid" then
 						G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
@@ -990,13 +1010,15 @@ SMODS.Joker {
 	pos = { x = 4, y = 0 },
 	rarity = 1,
 	cost = 4,
+	blueprint_compat = true,
+	demicoloncompat = true,
 	atlas = "acidjokers",
 	loc_vars = function(self, info_queue, card)
-		return {vars = {card.ability.acidity}}
+		return {vars = {card.ability.extra.acidity}}
 	end,
 	calculate = function(self, card, context)
-		if context.joker_main then
-			if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
+		if context.joker_main or context.forcetrigger then
+			if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.extra.type])) then
 				for i=1, #G.consumeables.cards do
 					if G.consumeables.cards[i].ability.set == "Acid" then
 						G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
@@ -1024,13 +1046,15 @@ if next(SMODS.find_mod("Cryptid")) then
 		pos = { x = 0, y = 1 },
 		rarity = 1,
 		cost = 4,
+		blueprint_compat = true,
+		demicoloncompat = true,
 		atlas = "acidjokers",
 		loc_vars = function(self, info_queue, card)
-			return {vars = {card.ability.acidity}}
+			return {vars = {card.ability.extra.acidity}}
 		end,
 		calculate = function(self, card, context)
-			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
+			if context.joker_main or context.forcetrigger then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.extra.type])) then
 					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
@@ -1048,13 +1072,15 @@ if next(SMODS.find_mod("Cryptid")) then
 		pos = { x = 1, y = 1 },
 		rarity = 1,
 		cost = 4,
+		blueprint_compat = true,
+		demicoloncompat = true,
 		atlas = "acidjokers",
 		loc_vars = function(self, info_queue, card)
-			return {vars = {card.ability.acidity}}
+			return {vars = {card.ability.extra.acidity}}
 		end,
 		calculate = function(self, card, context)
-			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
+			if context.joker_main or context.forcetrigger then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.extra.type])) then
 					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
@@ -1072,13 +1098,15 @@ if next(SMODS.find_mod("Cryptid")) then
 		pos = { x = 2, y = 1 },
 		rarity = 1,
 		cost = 4,
+		blueprint_compat = true,
+		demicoloncompat = true,
 		atlas = "acidjokers",
 		loc_vars = function(self, info_queue, card)
-			return {vars = {card.ability.acidity}}
+			return {vars = {card.ability.extra.acidity}}
 		end,
 		calculate = function(self, card, context)
-			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
+			if context.joker_main or context.forcetrigger then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.extra.type])) then
 					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
@@ -1096,13 +1124,15 @@ if next(SMODS.find_mod("Cryptid")) then
 		pos = { x = 3, y = 1 },
 		rarity = 1,
 		cost = 4,
+		blueprint_compat = true,
+		demicoloncompat = true,
 		atlas = "acidjokers",
 		loc_vars = function(self, info_queue, card)
-			return {vars = {card.ability.acidity}}
+			return {vars = {card.ability.extra.acidity}}
 		end,
 		calculate = function(self, card, context)
-			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
+			if context.joker_main or context.forcetrigger then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.extra.type])) then
 					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
@@ -1120,13 +1150,15 @@ if next(SMODS.find_mod("Cryptid")) then
 		pos = { x = 4, y = 1 },
 		rarity = 1,
 		cost = 4,
+		blueprint_compat = true,
+		demicoloncompat = true,
 		atlas = "acidjokers",
 		loc_vars = function(self, info_queue, card)
-			return {vars = {card.ability.acidity}}
+			return {vars = {card.ability.extra.acidity}}
 		end,
 		calculate = function(self, card, context)
-			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
+			if context.joker_main or context.forcetrigger then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.extra.type])) then
 					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
@@ -1136,8 +1168,8 @@ if next(SMODS.find_mod("Cryptid")) then
 				end
 			end
 		end,
-		in_pool = function(self)
-			if G.GAME.hands[self.config.type].played > 0 then
+		in_pool = function(self, card)
+			if G.GAME.hands["Five of a Kind"].played > 0 then
 				return true
 			end
 			return false
@@ -1150,13 +1182,15 @@ if next(SMODS.find_mod("Cryptid")) then
 		pos = { x = 0, y = 2 },
 		rarity = 1,
 		cost = 4,
+		blueprint_compat = true,
+		demicoloncompat = true,
 		atlas = "acidjokers",
 		loc_vars = function(self, info_queue, card)
-			return {vars = {card.ability.acidity}}
+			return {vars = {card.ability.extra.acidity}}
 		end,
 		calculate = function(self, card, context)
-			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
+			if context.joker_main or context.forcetrigger then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.extra.type])) then
 					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.aciditycard.ability.extra.acidity
@@ -1167,7 +1201,7 @@ if next(SMODS.find_mod("Cryptid")) then
 			end
 		end,
 		in_pool = function(self)
-			if G.GAME.hands[self.config.type].played > 0 then
+			if G.GAME.hands["Flush House"].played > 0 then
 				return true
 			end
 			return false
@@ -1180,13 +1214,15 @@ if next(SMODS.find_mod("Cryptid")) then
 		pos = { x = 1, y = 2 },
 		rarity = 1,
 		cost = 4,
+		blueprint_compat = true,
+		demicoloncompat = true,
 		atlas = "acidjokers",
 		loc_vars = function(self, info_queue, card)
-			return {vars = {card.ability.acidity}}
+			return {vars = {card.ability.extra.acidity}}
 		end,
 		calculate = function(self, card, context)
-			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
+			if context.joker_main or context.forcetrigger then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.extra.type])) then
 					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
@@ -1197,7 +1233,7 @@ if next(SMODS.find_mod("Cryptid")) then
 			end
 		end,
 		in_pool = function(self)
-			if G.GAME.hands[self.config.type].played > 0 then
+			if G.GAME.hands["Flush Five"].played > 0 then
 				return true
 			end
 			return false
@@ -1210,13 +1246,15 @@ if next(SMODS.find_mod("Cryptid")) then
 		pos = { x = 2, y = 2 },
 		rarity = 1,
 		cost = 4,
+		blueprint_compat = true,
+		demicoloncompat = true,
 		atlas = "acidjokers",
 		loc_vars = function(self, info_queue, card)
-			return {vars = {card.ability.acidity}}
+			return {vars = {card.ability.extra.acidity}}
 		end,
 		calculate = function(self, card, context)
-			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
+			if context.joker_main or context.forcetrigger then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.extra.type])) then
 					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
@@ -1227,7 +1265,7 @@ if next(SMODS.find_mod("Cryptid")) then
 			end
 		end,
 		in_pool = function(self)
-			if G.GAME.hands[self.config.type].played > 0 then
+			if G.GAME.hands["cry_Bulwark"].played > 0 then
 				return true
 			end
 			return false
@@ -1240,13 +1278,15 @@ if next(SMODS.find_mod("Cryptid")) then
 		pos = { x = 3, y = 2 },
 		rarity = 1,
 		cost = 4,
+		blueprint_compat = true,
+		demicoloncompat = true,
 		atlas = "acidjokers",
 		loc_vars = function(self, info_queue, card)
-			return {vars = {card.ability.acidity}}
+			return {vars = {card.ability.extra.acidity}}
 		end,
 		calculate = function(self, card, context)
-			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
+			if context.joker_main or context.forcetrigger then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.extra.type])) then
 					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
@@ -1257,7 +1297,7 @@ if next(SMODS.find_mod("Cryptid")) then
 			end
 		end,
 		in_pool = function(self)
-			if G.GAME.hands[self.config.type].played > 0 then
+			if G.GAME.hands["cry_Cluster" .. numbers_to_word({6, 21, 3, 11})].played > 0 then
 				return true
 			end
 			return false
@@ -1270,13 +1310,15 @@ if next(SMODS.find_mod("Cryptid")) then
 		pos = { x = 4, y = 2 },
 		rarity = 1,
 		cost = 4,
+		blueprint_compat = true,
+		demicoloncompat = true,
 		atlas = "acidjokers",
 		loc_vars = function(self, info_queue, card)
-			return {vars = {card.ability.acidity}}
+			return {vars = {card.ability.extra.acidity}}
 		end,
 		calculate = function(self, card, context)
-			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
+			if context.joker_main or context.forcetrigger then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.extra.type])) then
 					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
@@ -1287,7 +1329,7 @@ if next(SMODS.find_mod("Cryptid")) then
 			end
 		end,
 		in_pool = function(self)
-			if G.GAME.hands[self.config.type].played > 0 then
+			if G.GAME.hands["cry_UltPair"].played > 0 then
 				return true
 			end
 			return false
@@ -1300,13 +1342,15 @@ if next(SMODS.find_mod("Cryptid")) then
 		pos = { x = 0, y = 3 },
 		rarity = 1,
 		cost = 4,
+		blueprint_compat = true,
+		demicoloncompat = true,
 		atlas = "acidjokers",
 		loc_vars = function(self, info_queue, card)
-			return {vars = {card.ability.acidity}}
+			return {vars = {card.ability.extra.acidity}}
 		end,
 		calculate = function(self, card, context)
-			if context.joker_main then
-				if context.poker_hands ~= nil and context.scoring_name == "cry_None" then
+			if context.joker_main or context.forcetrigger then
+				if context.poker_hands ~= nil and context.scoring_name == card.ability.extra.type then
 					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
 							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity + card.ability.extra.acidity
@@ -1317,7 +1361,7 @@ if next(SMODS.find_mod("Cryptid")) then
 			end
 		end,
 		in_pool = function(self)
-			if G.GAME.hands[self.config.type].played > 0 then
+			if G.GAME.hands["cry_None"].played > 0 then
 				return true
 			end
 			return false
@@ -1326,20 +1370,22 @@ if next(SMODS.find_mod("Cryptid")) then
 
 	SMODS.Joker {
 		key = "transcendent",
-		config = {extra = {xacidity = 5.2, type = "cry_WholeDeck"}},
-		pos = { x = 4, y = 2 },
+		config = {extra = {xacidity = 52, type = "cry_WholeDeck"}},
+		pos = { x = 1, y = 3 },
 		rarity = 1,
 		cost = 4,
+		blueprint_compat = true,
+		demicoloncompat = true,
 		atlas = "acidjokers",
 		loc_vars = function(self, info_queue, card)
-			return {vars = {card.ability.acidity}}
+			return {vars = {card.ability.extra.xacidity}}
 		end,
 		calculate = function(self, card, context)
-			if context.joker_main then
-				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.type])) then
+			if context.joker_main or context.forcetrigger then
+				if context.poker_hands ~= nil and (next(context.poker_hands[card.ability.extra.type])) then
 					for i=1, #G.consumeables.cards do
 						if G.consumeables.cards[i].ability.set == "Acid" then
-							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity * card.ability.extra.acidity
+							G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity * card.ability.extra.xacidity
 						end
 					end
 					return {message = acidity_increase, colour = G.C.SECONDARY_SET.Acid}
@@ -1347,7 +1393,7 @@ if next(SMODS.find_mod("Cryptid")) then
 			end
 		end,
 		in_pool = function(self)
-			if G.GAME.hands[self.config.type].played > 0 then
+			if G.GAME.hands["cry_WholeDeck"].played > 0 then
 				return true
 			end
 			return false
