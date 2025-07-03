@@ -1,14 +1,24 @@
+if next(SMODS.find_mod("Cryptid")) then
+	krypton_edition, flerovium_description = "Mosaic", {"Creates {C:attention}#1#{} random", "{V:1}#2#{} cards"}
+else
+	krypton_edition, flerovium_description = "Bright", {"Creates {C:attention}#1#{} random", "{C:tarot}Tarot{}, {C:planet}Planet{},", "{C:spectral}Spectral{} and {C:element}Element"}
+end
+
 return {
 	misc = {
 		dictionary = {
 			b_acid_cards = "Acid Cards",
 			b_element_cards = "Element Cards",
-			k_bium_atomic_pack = "Atomic Pack",
 			k_acid = "Acid",
 			k_acidity_increase = "Acidity!",
+			k_bium_atomic_pack = "Atomic Pack",
 			k_element = "Element",
 			k_isotope = "Isotope",
-			k_used_up = "Used up!"
+			k_used_up = "Used up!",
+			k_bium_transoganesson = "Transoganesson"
+		},
+		labels = {
+			k_bium_transoganesson = "Transoganesson"
 		}
 	},
 	descriptions = {
@@ -20,6 +30,10 @@ return {
 			j_bium_salt_cube = {
 				name = "Salt Cube",
 				text = {"{C:money}+$#1#{} at the end of round", "Loses {C:red}-$#2#{} at the end of round"}
+			},
+			j_bium_systematic = {
+				name = "Systematic Element Name",
+				text = {"{C:mult}+#1#{} Mult if played", "hand contains exactly", "{C:attention}3{} letter cards"}
 			},
 			j_bium_proton = {
 				name = "Proton",
@@ -33,77 +47,81 @@ return {
 				name = "Electron",
 				text = {"Each scored card", "gives {C:chips}+#1#{} Chips"}
 			},
-			j_bium_systematic = {
-				name = "Systematic Element Name",
-				text = {"{C:mult}+#1#{} Mult if played hand contains", "exactly {C:attention}3{} Jacks, Queens, Kings or Aces"},
-			},
 			j_bium_exuberant = {
 				name = "Exuberant Joker",
-				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Pair"}
+				text = {"{C:acid}+#1# Acidity{} to all {C:acid}Acids", "if played hand contains", "a {C:attention}Pair"}
 			},
 			j_bium_exultant = {
 				name = "Exultant Joker",
-				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Three of a Kind"}
+				text = {"{C:acid}+#1# Acidity{} to all {C:acid}Acids", "if played hand contains", "a {C:attention}Three of a Kind"}
 			},
 			j_bium_rapturous = {
 				name = "Rapturous Joker",
-				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Two Pair"}
+				text = {"{C:acid}+#1# Acidity{} to all {C:acid}Acids", "if played hand contains", "a {C:attention}Two Pair"}
 			},
 			j_bium_blithe = {
 				name = "Blithe Joker",
-				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Straight"}
+				text = {"{C:acid}+#1# Acidity{} to all {C:acid}Acids", "if played hand contains", "a {C:attention}Straight"}
 			},
 			j_bium_ecstatic = {
 				name = "Ecstatic Joker",
-				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Flush"}
+				text = {"{C:acid}+#1# Acidity{} to all {C:acid}Acids", "if played hand contains", "a {C:attention}Flush"}
 			},
 			j_bium_thrilled = {
 				name = "Thrilled Joker",
-				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}High Card"}
+				text = {"{C:acid}+#1# Acidity{} to all {C:acid}Acids", "if played hand contains", "a {C:attention}High Card"}
 			},
 			j_bium_enlivened = {
 				name = "Enlivened Joker",
-				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Four of a Kind"}
+				text = {"{C:acid}+#1# Acidity{} to all {C:acid}Acids", "if played hand contains", "a {C:attention}Four of a Kind"}
 			},
 			j_bium_enthusiastic = {
 				name = "Enthusiastic Joker",
-				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Straight Flush"}
+				text = {"{C:acid}+#1# Acidity{} to all {C:acid}Acids", "if played hand contains", "a {C:attention}Straight Flush"}
 			},
 			j_bium_delighted = {
 				name = "Delighted Joker",
-				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Full House"}
+				text = {"{C:acid}+#1# Acidity{} to all {C:acid}Acids", "if played hand contains", "a {C:attention}Full House"}
 			},
 			j_bium_adrenalized = {
 				name = "Adrenalized Joker",
-				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Five of a Kind"}
+				text = {"{C:acid}+#1# Acidity{} to all {C:acid}Acids", "if played hand contains", "a {C:attention}Five of a Kind"}
 			},
 			j_bium_astonishing = {
 				name = "Astonishing Joker",
-				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Flush House"}
+				text = {"{C:acid}+#1# Acidity{} to all {C:acid}Acids", "if played hand contains", "a {C:attention}Flush House"}
 			},
 			j_bium_staggering = {
 				name = "Staggering Joker",
-				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Flush Five"}
+				text = {"{C:acid}+#1# Acidity{} to all {C:acid}Acids", "if played hand contains", "a {C:attention}Flush Five"}
 			},
 			j_bium_extraordinary = {
 				name = "Extraordinary Joker",
-				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Bulwark"}
+				text = {"{C:acid}+#1# Acidity{} to all {C:acid}Acids", "if played hand contains", "a {C:attention}Bulwark"}
 			},
 			j_bium_perplexing = {
 				name = "Perplexing Joker",
-				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "a {C:attention}Cluster"}
+				text = {"{C:acid}+#1# Acidity{} to all {C:acid}Acids", "if played hand contains", "a {C:attention}Cluster"}
 			},
 			j_bium_spectacular = {
 				name = "Spectacular Joker",
-				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "an {C:attention}Ultimate Pair"}
+				text = {"{C:acid}+#1# Acidity{} to all {C:acid}Acids", "if played hand contains", "an {C:attention}Ultimate Pair"}
 			},
 			j_bium_nullified = {
 				name = "Nullified Joker",
-				text = {"{C:acid}+#1#{} Acidity to all", "{C:acid}Acids{} if played hand is", "a {C:attention}None"}
+				text = {"{C:acid}+#1# Acidity{} to all {C:acid}Acids", "if played hand is", "{C:attention}None"}
 			},
 			j_bium_transcendent = {
 				name = "The Powerful Card That Most People May Call a \"Very Transcendent\" Joker",
 				text = {"{X:acid,C:white}X#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "{C:attention}The Entire Deck"}
+			},
+			j_bium_physics = {
+				name = "{C:blue}Physics",
+				text = {"{X:dark_edition,C:white}^#1#{} Mult", "Gains {X:dark_edition,C:white}^#2#{} Mult at the end of round", "{X:dark_edition,C:white}^Mult{} gain gains {X:dark_edition,C:white}^#3#{} Mult at the end of round"}
+			},
+			j_bium_chemistry = {
+				name = "{C:green}Chemistry",
+				text = {"{B:2,V:1}#1##2#{} Mult", "Increase operator by {C:attention}1{} at the end of round"}
 			}
 		},
 		Spectral = {
@@ -171,7 +189,7 @@ return {
 			},
 			c_bium_aluminum = {
 				name = "Aluminum",
-				text = {"{C:attention}-#1# Ante{}, {C:attention}+#2#{C:red} Discard"}
+				text = {"{C:attention}-#1#{} Ante, {C:red}+#2#{} Discard"}
 			},
 			c_bium_silicon = {
 				name = "Silicon",
