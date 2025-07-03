@@ -1,9 +1,3 @@
-if next(SMODS.find_mod("Cryptid")) then
-	krypton_edition, flerovium_description = "Mosaic", {"Creates {C:attention}#1#{} random", "{V:1}#2#{} cards"}
-else
-	krypton_edition, flerovium_description = "Bright", {"Creates {C:attention}#1#{} random", "{C:tarot}Tarot{}, {C:planet}Planet{},", "{C:spectral}Spectral{} and {C:element}Element"}
-end
-
 return {
 	misc = {
 		dictionary = {
