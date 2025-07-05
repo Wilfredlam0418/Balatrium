@@ -492,7 +492,7 @@ SMODS.Consumable {
 		return {vars = {self.config.extra.acidity}}
 	end,
 	can_use = function()
-		return true
+		return #G.consumeables > 0
 	end,
 	use = function(self, card)
 		for i=1, #G.consumeables.cards do
@@ -577,6 +577,407 @@ SMODS.Consumable {
 	use = function(self, card)
 		ease_dollars(card.ability.extra.money)
 		ease_dollars(G.GAME.dollars * (card.ability.extra.Xmoney-1))
+	end
+}
+
+SMODS.Consumable {
+	set = "Element",
+	key = "scandium",
+	config = {extra = {rarity = "Common"}},
+	atlas = "element",
+	pos = {x = 3, y = 3},
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.rarity, colours = {G.C.RARITY[card.ability.extra.rarity]}}}
+	end,
+	can_use = function()
+		return true
+	end,
+	use = function(self, card)
+		for i=1,3 do
+			local card = create_card("Joker", G.jokers, nil, card.ability.extra.rarity)
+			card:add_to_deck()
+			G.jokers:emplace(card)
+		end
+	end
+}
+
+SMODS.Consumable {
+	set = "Element",
+	key = "titanium",
+	config = {extra = {rarity = "Uncommon"}},
+	atlas = "element",
+	pos = {x = 4, y = 3},
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.rarity, colours = {G.C.RARITY[card.ability.extra.rarity]}}}
+	end,
+	can_use = function()
+		return true
+	end,
+	use = function(self, card)
+		for i=1,3 do
+			local card = create_card("Joker", G.jokers, nil, card.ability.extra.rarity)
+			card:add_to_deck()
+			G.jokers:emplace(card)
+		end
+	end
+}
+
+SMODS.Consumable {
+	set = "Element",
+	key = "vanadium",
+	config = {extra = {rarity = "Rare"}},
+	atlas = "element",
+	pos = {x = 5, y = 3},
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.rarity, colours = {G.C.RARITY[card.ability.extra.rarity]}}}
+	end,
+	can_use = function()
+		return true
+	end,
+	use = function(self, card)
+		for i=1,2 do
+			local card = create_card("Joker", G.jokers, nil, card.ability.extra.rarity)
+			card:add_to_deck()
+			G.jokers:emplace(card)
+		end
+	end
+}
+
+SMODS.Consumable {
+	set = "Element",
+	key = "chromium",
+	config = {extra = {rarity1 = "Legendary", rarity2 = "Uncommon"}},
+	atlas = "element",
+	pos = {x = 6, y = 3},
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.rarity1, card.ability.extra.rarity2, colours = {G.C.RARITY[card.ability.extra.rarity1], G.C.RARITY[card.ability.extra.rarity2]}}}
+	end,
+	can_use = function()
+		return true
+	end,
+	use = function(self, card)
+		local card = create_card("Joker", G.jokers, nil, card.ability.extra.rarity1)
+		card:add_to_deck()
+		G.jokers:emplace(card)
+		local card = create_card("Joker", G.jokers, nil, card.ability.extra.rarity2)
+		card:add_to_deck()
+		G.jokers:emplace(card)
+	end
+}
+
+SMODS.Consumable {
+	set = "Element",
+	key = "manganese",
+	config = {extra = {rarity1 = "Legendary", rarity2 = "Rare"}},
+	atlas = "element",
+	pos = {x = 7, y = 3},
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.rarity1, card.ability.extra.rarity2, colours = {G.C.RARITY[card.ability.extra.rarity1], G.C.RARITY[card.ability.extra.rarity2]}}}
+	end,
+	can_use = function()
+		return true
+	end,
+	use = function(self, card)
+		local card = create_card("Joker", G.jokers, nil, card.ability.extra.rarity1)
+		card:add_to_deck()
+		G.jokers:emplace(card)
+		local card = create_card("Joker", G.jokers, nil, card.ability.extra.rarity2)
+		card:add_to_deck()
+		G.jokers:emplace(card)
+	end
+}
+
+SMODS.Consumable {
+	set = "Element",
+	key = "iron",
+	config = {},
+	atlas = "element",
+	pos = {x = 8, y = 3},
+	loc_vars = function()
+		return {}
+	end,
+	can_use = function()
+		for i=1, #G.jokers.cards do
+			if G.jokers.cards[i].ability.eternal then
+				return true
+			end
+		end
+		return false
+	end,
+	use = function()
+		for i=1, #G.jokers.cards, 1 do
+			G.jokers.cards[i].ability.eternal = false
+		end
+	end
+}
+
+SMODS.Consumable {
+	set = "Element",
+	key = "cobalt",
+	config = {},
+	atlas = "element",
+	pos = {x = 9, y = 3},
+	loc_vars = function()
+		return {}
+	end,
+	can_use = function()
+		for i=1, #G.jokers.cards do
+			if G.jokers.cards[i].ability.perishable then
+				return true
+			end
+		end
+		return false
+	end,
+	use = function()
+		for i=1, #G.jokers.cards, 1 do
+			G.jokers.cards[i].ability.perishable = false
+		end
+	end
+}
+
+SMODS.Consumable {
+	set = "Element",
+	key = "nickel",
+	config = {},
+	atlas = "element",
+	pos = {x = 10, y = 3},
+	loc_vars = function()
+		return {}
+	end,
+	can_use = function()
+		for i=1, #G.jokers.cards do
+			if G.jokers.cards[i].ability.rental then
+				return true
+			end
+		end
+		return false
+	end,
+	use = function()
+		for i=1, #G.jokers.cards, 1 do
+			G.jokers.cards[i].ability.rental = false
+		end
+	end
+}
+
+SMODS.Consumable {
+	set = "Element",
+	key = "copper",
+	config = {max_highlighted = 3, extra = {seal = "bium_copper"}},
+	atlas = "element",
+	pos = {x = 11, y = 3},
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.max_highlighted, colours = {HEX("EB8170")}}}
+	end,
+	use = function(self, card, area, copier)
+		for i=1, #G.hand.highlighted do
+			G.hand.highlighted[i]:set_seal(card.ability.extra.seal, nil, true)
+		end
+	end
+}
+
+SMODS.Consumable {
+	set = "Element",
+	key = "zinc",
+	config = {extra = {cards = 2}},
+	atlas = "element",
+	pos = {x = 12, y = 3},
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.cards}}
+	end,
+	can_use = function()
+		return true
+	end,
+	use = function(self, card)
+		SMODS.draw_cards(card.ability.extra.cards)
+	end
+}
+
+SMODS.Consumable {
+	set = "Element",
+	key = "gallium",
+	config = {extra = {ante_decrease = 1, hands = 1}},
+	atlas = "element",
+	pos = {x = 13, y = 3},
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.ante_decrease, card.ability.extra.hands}}
+	end,
+	can_use = function()
+		return true
+	end,
+	use = function(self, card)
+		ease_ante(-card.ability.extra.ante_decrease)
+		G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.hands
+	end
+}
+
+SMODS.Consumable {
+	set = "Element",
+	key = "germanium",
+	config = {extra = {amount = 3, type = "Planet"}},
+	atlas = "element",
+	pos = {x = 14, y = 3},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {
+				card.ability.extra.amount,
+				card.ability.extra.type,
+				colours = {G.C.SECONDARY_SET[card.ability.extra.type]}
+			}
+		}
+	end,
+	can_use = function()
+		return true
+	end,
+	use = function(self, card)
+		for i=1, card.ability.extra.amount do
+			local card = create_card(card.ability.type, G.consumeables, nil, nil, true, true)
+			card:add_to_deck()
+			G.consumeables:emplace(card)
+		end
+	end
+}
+
+SMODS.Consumable {
+	set = "Element",
+	key = "arsenic",
+	config = {extra = {slots = 1}},
+	atlas = "element",
+	pos = {x = 15, y = 3},
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.slots}}
+	end,
+	can_use = function()
+		return true
+	end,
+	use = function(self, card)
+		G.jokers.config.card_limit = G.jokers.config.card_limit + card.ability.extra.slots
+	end
+}
+
+SMODS.Consumable {
+	set = "Element",
+	key = "selenium",
+	config = {extra = {slots = 1}},
+	atlas = "element",
+	pos = {x = 16, y = 3},
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.slots}}
+	end,
+	can_use = function()
+		return true
+	end,
+	use = function(self, card)
+		G.consumeables.config.card_limit = G.consumeables.config.card_limit + card.ability.extra.slots
+	end
+}
+
+SMODS.Consumable {
+	set = "Element",
+	key = "bromine",
+	config = {extra = {xacidity = 1.25}},
+	atlas = "element",
+	pos = {x = 17, y = 2},
+	loc_vars = function(self, info_queue, card)
+		return {vars = {self.config.extra.acidity}}
+	end,
+	can_use = function()
+		return #G.consumeables > 0
+	end,
+	use = function(self, card)
+		for i=1, #G.consumeables.cards do
+			if G.consumeables.cards[i].ability.set == "Acid" then
+				G.consumeables.cards[i].ability.acidity = G.consumeables.cards[i].ability.acidity * card.ability.extra.xacidity
+			end
+		end
+	end
+}
+
+SMODS.Consumable {
+	set = "Element",
+	key = "krypton",
+	config = {max_highlighted = 1},
+	atlas = "element",
+	pos = {x = 18, y = 3},
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.max_highlighted}}
+	end,
+	use = function(self, card, area, copier)
+		local used_consumable = copier or card
+		for i = 1, #G.hand.highlighted do
+			local highlighted = G.hand.highlighted[i]
+			if highlighted ~= card then
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						play_sound("tarot1")
+						highlighted:juice_up(0.3, 0.5)
+						return true
+					end,
+				}))
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 0.1,
+					func = function()
+						if highlighted then
+							highlighted:set_edition({negative=true})
+						end
+						return true
+					end,
+				}))
+				delay(0.5)
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 0.2,
+					func = function()
+						G.hand:unhighlight_all()
+						return true
+					end,
+				}))
+			end
+		end
+	end
+}
+
+SMODS.Consumable {
+	set = "Element",
+	key = "nihonium",
+	atlas = "element",
+	hidden = true,
+	pos = {x = 13, y = 6},
+	can_use = function()
+		return true
+	end,
+	use = function()
+		local jokers = {}
+		local joker_abilities = {}
+		local joker_editions = {}
+		for i=1, #G.jokers.cards do
+			jokers[#jokers+1] = G.jokers.cards[i].config.center.key
+			joker_abilities[#joker_abilities+1] = G.jokers.cards[i].ability
+			joker_editions[#joker_editions+1] = G.jokers.cards[i].edition or 0
+		end
+		local consumables = {}
+		local consumable_abilities = {}
+		local consumable_editions = {}
+		for i=1, #G.consumeables.cards do
+			consumables[#consumables+1] = G.consumeables.cards[i].config.center.key
+			consumable_abilities[#consumable_abilities+1] = G.consumeables.cards[i].ability
+			consumable_editions[#consumable_editions+1] = G.consumeables.cards[i].edition or 0
+		end
+		G.jokers.cards = {}
+		G.consumeables.cards = {}
+		for i=1, #jokers do
+			SMODS.add_card({key = jokers[i], area = G.consumeables})
+			G.consumeables.cards[i].ability = joker_abilities[i]
+			if joker_editions[i] == 0 then joker_editions[i] = nil end
+			G.consumeables.cards[i].edition = joker_editions[i]
+		end
+		for i=1, #consumables do
+			SMODS.add_card({key = consumables[i], area = G.jokers})
+			G.jokers.cards[i].ability = consumable_abilities[i]
+			if consumable_editions[i] == 0 then consumable_editions[i] = nil end
+			G.jokers.cards[i].edition = consumable_editions[i]
+		end
+		G.jokers.config.card_limit, G.consumeables.config.card_limit = G.consumeables.config.card_limit, G.jokers.config.card_limit
 	end
 }
 
@@ -1409,8 +1810,8 @@ SMODS.Booster {
 	group_key = "k_bium_atomic_pack",
 	draw_hand = true,
 	create_card = function(self, card)
-		local card = create_card("Element", G.pack_cards, nil, nil, true, true)
-		return card
+		local card_ = create_card("Element", G.pack_cards, nil, nil, true, true)
+		return card_
 	end,
 	pos = {x = 0, y = 0},
 	weight = 1,
@@ -1510,5 +1911,23 @@ SMODS.Booster {
 				card and card.ability.extra or self.config.extra,
 			},
 		}
+	end
+}
+
+SMODS.Seal {
+	key = "copper",
+	atlas = "modifier",
+	pos = {x = 0, y = 0},
+	config = {extra = {type = "Element"}},
+	badge_colour = HEX("EB8170"),
+	loc_vars = function(self)
+		return {vars = {self.config.extra.type, colours = {G.C.SECONDARY_SET[self.config.extra.type]}}}
+	end,
+	calculate = function(self, card, context)
+		if context.main_scoring and context.cardarea == G.play then
+			local card = create_card(self.config.extra.type, G.consumeables, nil, nil, true, true)
+			card:add_to_deck()
+			G.consumeables:emplace(card)
+		end
 	end
 }
