@@ -6,13 +6,10 @@ return {
 			k_acid = "Acid",
 			k_acidity_increase = "Acidity!",
 			k_bium_atomic_pack = "Atomic Pack",
+			k_bium_copper = "Copper Seal",
 			k_element = "Element",
 			k_isotope = "Isotope",
 			k_used_up = "Used up!",
-			k_bium_transoganesson = "Transoganesson"
-		},
-		labels = {
-			k_bium_transoganesson = "Transoganesson"
 		}
 	},
 	descriptions = {
@@ -108,14 +105,6 @@ return {
 			j_bium_transcendent = {
 				name = "The Powerful Card That Most People May Call a \"Very Transcendent\" Joker",
 				text = {"{X:acid,C:white}X#1#{} Acidity to all", "{C:acid}Acids{} if played hand contains", "{C:attention}The Entire Deck"}
-			},
-			j_bium_physics = {
-				name = "{C:blue}Physics",
-				text = {"{X:dark_edition,C:white}^#1#{} Mult", "Gains {X:dark_edition,C:white}^#2#{} Mult at the end of round", "{X:dark_edition,C:white}^Mult{} gain gains {X:dark_edition,C:white}^#3#{} Mult at the end of round"}
-			},
-			j_bium_chemistry = {
-				name = "{C:green}Chemistry",
-				text = {"{B:2,V:1}#1##2#{} Mult", "Increase operator by {C:attention}1{} at the end of round"}
 			}
 		},
 		Spectral = {
@@ -212,6 +201,70 @@ return {
 			c_bium_calcium = {
 				name = "Calcium",
 				text = {"{C:money}+$#1#{}, then multiply", "{C:money}money{} by {X:money,C:white}X#2#"}
+			},
+			c_bium_scandium = {
+				name = "Scandium",
+				text = {"Creates {C:attention}3{} {V:1}#1#{} Joker"}
+			},
+			c_bium_titanium = {
+				name = "Titanium",
+				text = {"Creates {C:attention}3{} {V:1}#1#{} Joker"}
+			},
+			c_bium_vanadium = {
+				name = "Vanadium",
+				text = {"Creates {C:attention}2{} {V:1}#1#{} Joker"}
+			},
+			c_bium_chromium = {
+				name = "Chromium",
+				text = {"Creates a {V:1}#1#{} Joker", "and a {V:2}#2#{} Joker"}
+			},
+			c_bium_manganese = {
+				name = "Manganese",
+				text = {"Creates a {V:1}#1#{} Joker", "and a {V:2}#2#{} Joker"}
+			},
+			c_bium_iron = {
+				name = "Iron",
+				text = {"Removes {C:attention}Eternal{} from", "all jokers"}
+			},
+			c_bium_cobalt = {
+				name = "Cobalt",
+				text = {"Removes {C:attention}Perishable{} from", "all jokers"}
+			},
+			c_bium_nickel = {
+				name = "Nickel",
+				text = {"Removes {C:attention}Rental{} from", "all jokers"}
+			},
+			c_bium_copper = {
+				name = "Copper",
+				text = {"Adds {V:1}Copper Seals{} to", "up to {C:attention}#1#{} selected cards"}
+			},
+			c_bium_zinc = {
+				name = "Zinc",
+				text = {"Draws {C:attention}#1#{} cards from the deck"}
+			},
+			c_bium_gallium = {
+				name = "Gallium",
+				text = {"{C:attention}-#1#{} Ante, {C:blue}+#2#{} Hand"}
+			},
+			c_bium_germanium = {
+				name = "Germanium",
+				text = {"Creates {C:attention}#1#{} random", "{V:1}#2#{} cards"}
+			},
+			c_bium_arsenic = {
+				name = "Arsenic",
+				text = {"{C:dark_edition}+#1#{} joker slot"}
+			},
+			c_bium_selenium = {
+				name = "Selenium",
+				text = {"{C:dark_edition}+#1#{} consumable slot"}
+			},
+			c_bium_bromine = {
+				name = "Bromine",
+				text = {"{X:acid,C:white}X#1#{} Acidity to all {C:acid}Acids"}
+			},
+			c_bium_krypton = {
+				name = "Krypton",
+				text = {"Adds {C:dark_edition}Negative{} to", "{C:attention}#1#{} selected cards"}
 			}
 		},
 		Acid = {
@@ -229,6 +282,10 @@ return {
 			}
 		},
 		Other = {
+			bium_copper = {
+				name = "Copper Seal",
+				text = {"When scored, create", "an {V:1}#1#{} card"}
+			},
 			undiscovered_element = {
 				name = "Not Discovered",
 				text = {"Purchase or use", "this card in an", "unseeded run to", "learn what it does"},
