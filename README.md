@@ -2,17 +2,15 @@
 A Balatro mod that add chemical elements.
 
 Includes:
-* 20 Element cards
+* 37 Element cards
 * 3 Acid cards
 * 11 Jokers
 * 1 Spectral card
 
 Future plans:
-* The 98 remaining Element cards
+* The 81 remaining Element cards
 * More Jokers
 * Card modifiers
 * A completely new Tablet mechanic
 
-There are more jokers with other mods.
-
-**Note:** I do not playtest this mod. Please create an issue if the game crashes or any bugs are found.
+Note: This mod has **cross-mod** content. You may experiment with other mods to see what new things appear!
