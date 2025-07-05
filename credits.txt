@@ -52,6 +52,23 @@ Chlorine: None
 Argon: Cryptid (Copied from Replica)
 Potassium: None
 Calcium: None
+Scandium: None
+Titanium: None
+Vanadium: None
+Chromium: None
+Manganese: None
+Iron: None
+Cobalt: None
+Nickel: None
+Copper: None
+Zinc: None
+Gallium: POLTERWORX (Discontinued mod, hand bonus copied from Sorrow)
+Germanium: None
+Arsenic: None
+Selenium: None
+Bromine: None
+Krypton: Cryptid (Copied from Replica)
+Nihonium: None
 
 = Acid Cards =
 Hydrofluoric Acid: POLTERWORX (Discontinued mod, copied from Solace and Sorrow)
@@ -60,3 +77,8 @@ Hydrobromic Acid: None
 
 == Booster Packs ==
 Atomic Packs: UnStable (Copied from Expansion Packs)
+
+== Card Modifiers ==
+
+= Seals =
+Copper Seal: None
