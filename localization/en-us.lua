@@ -204,19 +204,19 @@ return {
 			},
 			c_bium_scandium = {
 				name = "Scandium",
-				text = {"Creates {C:attention}3{} {V:1}#1#{} Joker"}
+				text = {"Creates {C:attention}3{} {V:1}#1#{} Jokers"}
 			},
 			c_bium_titanium = {
 				name = "Titanium",
-				text = {"Creates {C:attention}3{} {V:1}#1#{} Joker"}
+				text = {"Creates {C:attention}3{} {V:1}#1#{} Jokers"}
 			},
 			c_bium_vanadium = {
 				name = "Vanadium",
-				text = {"Creates {C:attention}2{} {V:1}#1#{} Joker"}
+				text = {"Creates {C:attention}2{} {V:1}#1#{} Jokers"}
 			},
 			c_bium_chromium = {
 				name = "Chromium",
-				text = {"Creates a {V:1}#1#{} Joker", "and a {V:2}#2#{} Joker"}
+				text = {"Creates a {V:1}#1#{} Joker", "and an {V:2}#2#{} Joker"}
 			},
 			c_bium_manganese = {
 				name = "Manganese",
