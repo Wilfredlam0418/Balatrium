@@ -86,7 +86,6 @@ SMODS.Consumable {
 	loc_vars = function(self, info_queue, card)
 		return {
 			vars = {
-				card.ability.max_highighted,
 				localize(card.ability.suit_conv, "suits_plural"),
 				colours = {G.C.SUITS[card.ability.suit_conv]}
 			}
@@ -108,7 +107,6 @@ if next(SMODS.find_mod("SixSuits")) then
 		loc_vars = function(self, info_queue, card)
 			return {
 				vars = {
-					card.ability.max_highighted,
 					localize(card.ability.suit_conv, "suits_plural"),
 					colours = {G.C.SUITS[card.ability.suit_conv]}
 				}
@@ -126,7 +124,6 @@ if next(SMODS.find_mod("SixSuits")) then
 		loc_vars = function(self, info_queue, card)
 			return {
 				vars = {
-					card.ability.max_highighted,
 					localize(card.ability.suit_conv, "suits_plural"),
 					colours = {G.C.SUITS[card.ability.suit_conv]}
 				}
@@ -144,38 +141,9 @@ SMODS.Consumable {
 	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.max_highlighted}}
 	end,
-	use = function(self, card, area, copier)
-		local used_consumable = copier or card
-		for i = 1, #G.hand.highlighted do
-			local highlighted = G.hand.highlighted[i]
-			if highlighted ~= card then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						play_sound("tarot1")
-						highlighted:juice_up(0.3, 0.5)
-						return true
-					end,
-				}))
-				G.E_MANAGER:add_event(Event({
-					trigger = "after",
-					delay = 0.1,
-					func = function()
-						if highlighted then
-							highlighted:set_edition({foil=true})
-						end
-						return true
-					end,
-				}))
-				delay(0.5)
-				G.E_MANAGER:add_event(Event({
-					trigger = "after",
-					delay = 0.2,
-					func = function()
-						G.hand:unhighlight_all()
-						return true
-					end,
-				}))
-			end
+	use = function(self, card)
+		for i, j in ipairs(G.hand.highlighted) do
+			j:set_edition({foil=true})
 		end
 	end
 }
@@ -186,11 +154,8 @@ SMODS.Consumable {
 	config = {extra = {joker = "j_bium_battery"}},
 	atlas = "element",
 	pos = {x = 0, y = 1},
-	loc_vars = function()
-		return {}
-	end,
-	can_use = function()
-		return true
+	loc_vars = function(self, info_queue, card)
+		return {vars = {localize({key = card.ability.extra.joker, set = "Joker", type = "name_text"})}}
 	end,
 	use = function(self, card)
 		SMODS.add_card({key = card.ability.extra.joker})
@@ -206,11 +171,8 @@ SMODS.Consumable {
 	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.extra.money}}
 	end,
-	can_use = function()
-		return true
-	end,
 	use = function(self, card)
-		G.GAME.dollars = G.GAME.dollars + card.ability.extra.money
+		ease_dollars(card.ability.extra.money)
 	end
 }
 
@@ -222,9 +184,6 @@ SMODS.Consumable {
 	pos = {x = 13, y = 1},
 	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.extra.ante_decrease}}
-	end,
-	can_use = function()
-		return true
 	end,
 	use = function(self)
 		ease_ante(-card.ability.extra.ante_decrease)
@@ -240,7 +199,6 @@ SMODS.Consumable {
 	loc_vars = function(self, info_queue, card)
 		return {
 			vars = {
-				card.ability.max_highighted,
 				localize(card.ability.suit_conv, "suits_plural"),
 				colours = {G.C.SUITS[card.ability.suit_conv]}
 			}
@@ -257,7 +215,6 @@ SMODS.Consumable {
 	loc_vars = function(self, info_queue, card)
 		return {
 			vars = {
-				card.ability.max_highighted,
 				localize(card.ability.suit_conv, "suits_plural"),
 				colours = {G.C.SUITS[card.ability.suit_conv]}
 			}
@@ -274,7 +231,6 @@ SMODS.Consumable {
 	loc_vars = function(self, info_queue, card)
 		return {
 			vars = {
-				card.ability.max_highighted,
 				localize(card.ability.suit_conv, "suits_plural"),
 				colours = {G.C.SUITS[card.ability.suit_conv]}
 			}
@@ -291,9 +247,7 @@ SMODS.Consumable {
 	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.extra.type, colours = {G.C.SECONDARY_SET[card.ability.extra.type]}}}
 	end,
-	can_use = function()
-		return true
-	end,
+
 	use = function(self, card)
 		local _card = create_card(card.ability.extra.type, G.consumeables, nil, nil, true, true)
 		_card:add_to_deck()
@@ -311,37 +265,8 @@ SMODS.Consumable {
 		return {vars = {card.ability.max_highlighted}}
 	end,
 	use = function(self, card, area, copier)
-		local used_consumable = copier or card
-		for i = 1, #G.hand.highlighted do
-			local highlighted = G.hand.highlighted[i]
-			if highlighted ~= card then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						play_sound("tarot1")
-						highlighted:juice_up(0.3, 0.5)
-						return true
-					end,
-				}))
-				G.E_MANAGER:add_event(Event({
-					trigger = "after",
-					delay = 0.1,
-					func = function()
-						if highlighted then
-							highlighted:set_edition({holo=true})
-						end
-						return true
-					end,
-				}))
-				delay(0.5)
-				G.E_MANAGER:add_event(Event({
-					trigger = "after",
-					delay = 0.2,
-					func = function()
-						G.hand:unhighlight_all()
-						return true
-					end,
-				}))
-			end
+		for i, j in ipairs(G.hand.highlighted) do
+			j:set_edition({holo=true})
 		end
 	end
 }
@@ -353,10 +278,7 @@ SMODS.Consumable {
 	atlas = "element",
 	pos = {x = 0, y = 2},
 	loc_vars = function()
-		return {}
-	end,
-	can_use = function()
-		return true
+		return {vars = {localize({key = card.ability.extra.joker, set = "Joker", type = "name_text"})}}
 	end,
 	use = function(self, card)
 		SMODS.add_card({key = card.ability.extra.joker})
@@ -372,9 +294,6 @@ SMODS.Consumable {
 	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.extra.Xmoney}}
 	end,
-	can_use = function()
-		return true
-	end,
 	use = function(self, card)
 		G.GAME.dollars = G.GAME.dollars * card.ability.extra.Xmoney
 	end
@@ -389,12 +308,9 @@ SMODS.Consumable {
 	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.extra.ante_decrease, card.ability.extra.discards}}
 	end,
-	can_use = function()
-		return true
-	end,
 	use = function(self, card)
-		ease_ante(-card.ability.ante_decrease)
-		G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.discards
+		ease_ante(-card.ability.extra.ante_decrease)
+		ease_discard(card.ability.extra.discards)
 	end
 }
 
@@ -413,14 +329,9 @@ SMODS.Consumable {
 			}
 		}
 	end,
-	can_use = function()
-		return true
-	end,
 	use = function(self, card)
-		for i=1, card.ability.amount do
-			local _card = create_card(card.ability.extra.type, G.consumeables, nil, nil, true, true)
-			_card:add_to_deck()
-			G.consumeables:emplace(_card)
+		for i=1, card.ability.extra.amount do
+			SMODS.add_card({set = card.ability.extra.type})
 		end
 	end
 }
@@ -440,14 +351,9 @@ SMODS.Consumable {
 			}
 		}
 	end,
-	can_use = function()
-		return true
-	end,
 	use = function(self, card)
 		for i=1, card.ability.amount do
-			local _card = create_card(card.ability.type, G.jokers, nil, nil, true, true)
-			_card:add_to_deck()
-			G.jokers:emplace(_card)
+			SMODS.add_card({set = card.ability.extra.type})
 		end
 	end
 }
@@ -460,9 +366,6 @@ SMODS.Consumable {
 	loc_vars = function()
 		return {vars = {colours = {G.C.SECONDARY_SET.VOUCHER}}}
 	end,
-	can_use = function()
-		return true
-	end,
 	use = function()
 		local temp = G.GAME.current_round.voucher
 		local card = create_card("Voucher", G.redeemed_vouchers_during_hand, nil, nil, true, true)
@@ -471,14 +374,7 @@ SMODS.Consumable {
 		card.shop_voucher = false
 		card:redeem()
 		G.GAME.current_round.voucher = temp
-		G.E_MANAGER:add_event(Event({
-			trigger = "after",
-			delay = 0,
-			func = function()
-				card:start_dissolve()
-				return true
-			end,
-		}))
+		card:start_dissolve()
 	end
 }
 
@@ -513,37 +409,8 @@ SMODS.Consumable {
 		return {vars = {card.ability.max_highlighted}}
 	end,
 	use = function(self, card, area, copier)
-		local used_consumable = copier or card
-		for i = 1, #G.hand.highlighted do
-			local highlighted = G.hand.highlighted[i]
-			if highlighted ~= card then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						play_sound("tarot1")
-						highlighted:juice_up(0.3, 0.5)
-						return true
-					end,
-				}))
-				G.E_MANAGER:add_event(Event({
-					trigger = "after",
-					delay = 0.1,
-					func = function()
-						if highlighted then
-							highlighted:set_edition({polychrome=true})
-						end
-						return true
-					end,
-				}))
-				delay(0.5)
-				G.E_MANAGER:add_event(Event({
-					trigger = "after",
-					delay = 0.2,
-					func = function()
-						G.hand:unhighlight_all()
-						return true
-					end,
-				}))
-			end
+		for i, j in ipairs(G.hand.highlighted) do
+			j:set_edition({polychrome=true})
 		end
 	end
 }
@@ -554,8 +421,8 @@ SMODS.Consumable {
 	config = {extra = {joker = "j_gros_michel"}},
 	atlas = "element",
 	pos = {x = 0, y = 3},
-	can_use = function()
-		return true
+	loc_vars = function(self, info_queue, card)
+		return {vars = {localize({key = card.ability.extra.joker, set = "Joker", type = "name_text"})}}
 	end,
 	use = function(self, card)
 		SMODS.add_card({key = card.ability.extra.joker})
@@ -571,12 +438,9 @@ SMODS.Consumable {
 	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.extra.money, card.ability.extra.Xmoney}}
 	end,
-	can_use = function()
-		return true
-	end,
 	use = function(self, card)
 		ease_dollars(card.ability.extra.money)
-		ease_dollars(G.GAME.dollars * (card.ability.extra.Xmoney-1))
+		G.GAME.dollars = G.GAME.dollars * card.ability.extra.Xmoney
 	end
 }
 
@@ -587,16 +451,14 @@ SMODS.Consumable {
 	atlas = "element",
 	pos = {x = 3, y = 3},
 	loc_vars = function(self, info_queue, card)
-		return {vars = {card.ability.extra.rarity, colours = {G.C.RARITY[card.ability.extra.rarity]}}}
+		return {vars = {card.ability.extra.rarity, colours = {G.C.RARITY[self.config.rarity]}}}
 	end,
 	can_use = function()
 		return true
 	end,
 	use = function(self, card)
 		for i=1,3 do
-			local card = create_card("Joker", G.jokers, nil, card.ability.extra.rarity)
-			card:add_to_deck()
-			G.jokers:emplace(card)
+			SMODS.add_card({set = "Joker", rarity = card.ability.extra.rarity})
 		end
 	end
 }
@@ -610,14 +472,9 @@ SMODS.Consumable {
 	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.extra.rarity, colours = {G.C.RARITY[card.ability.extra.rarity]}}}
 	end,
-	can_use = function()
-		return true
-	end,
 	use = function(self, card)
 		for i=1,3 do
-			local card = create_card("Joker", G.jokers, nil, card.ability.extra.rarity)
-			card:add_to_deck()
-			G.jokers:emplace(card)
+			SMODS.add_card({set = "Joker", rarity = card.ability.extra.rarity})
 		end
 	end
 }
@@ -631,14 +488,9 @@ SMODS.Consumable {
 	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.extra.rarity, colours = {G.C.RARITY[card.ability.extra.rarity]}}}
 	end,
-	can_use = function()
-		return true
-	end,
 	use = function(self, card)
 		for i=1,2 do
-			local card = create_card("Joker", G.jokers, nil, card.ability.extra.rarity)
-			card:add_to_deck()
-			G.jokers:emplace(card)
+			SMODS.add_card({set = "Joker", rarity = card.ability.extra.rarity})
 		end
 	end
 }
@@ -652,16 +504,9 @@ SMODS.Consumable {
 	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.extra.rarity1, card.ability.extra.rarity2, colours = {G.C.RARITY[card.ability.extra.rarity1], G.C.RARITY[card.ability.extra.rarity2]}}}
 	end,
-	can_use = function()
-		return true
-	end,
 	use = function(self, card)
-		local card = create_card("Joker", G.jokers, nil, card.ability.extra.rarity1)
-		card:add_to_deck()
-		G.jokers:emplace(card)
-		local card = create_card("Joker", G.jokers, nil, card.ability.extra.rarity2)
-		card:add_to_deck()
-		G.jokers:emplace(card)
+		SMODS.add_card({set = "Joker", rarity = card.ability.extra.rarity1})
+		SMODS.add_card({set = "Joker", rarity = card.ability.extra.rarity2})
 	end
 }
 
@@ -674,16 +519,9 @@ SMODS.Consumable {
 	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.extra.rarity1, card.ability.extra.rarity2, colours = {G.C.RARITY[card.ability.extra.rarity1], G.C.RARITY[card.ability.extra.rarity2]}}}
 	end,
-	can_use = function()
-		return true
-	end,
 	use = function(self, card)
-		local card = create_card("Joker", G.jokers, nil, card.ability.extra.rarity1)
-		card:add_to_deck()
-		G.jokers:emplace(card)
-		local card = create_card("Joker", G.jokers, nil, card.ability.extra.rarity2)
-		card:add_to_deck()
-		G.jokers:emplace(card)
+		SMODS.add_card({set = "Joker", rarity = card.ability.extra.rarity1})
+		SMODS.add_card({set = "Joker", rarity = card.ability.extra.rarity2})
 	end
 }
 
@@ -693,9 +531,6 @@ SMODS.Consumable {
 	config = {},
 	atlas = "element",
 	pos = {x = 8, y = 3},
-	loc_vars = function()
-		return {}
-	end,
 	can_use = function()
 		for i=1, #G.jokers.cards do
 			if G.jokers.cards[i].ability.eternal then
@@ -717,9 +552,6 @@ SMODS.Consumable {
 	config = {},
 	atlas = "element",
 	pos = {x = 9, y = 3},
-	loc_vars = function()
-		return {}
-	end,
 	can_use = function()
 		for i=1, #G.jokers.cards do
 			if G.jokers.cards[i].ability.perishable then
@@ -741,9 +573,6 @@ SMODS.Consumable {
 	config = {},
 	atlas = "element",
 	pos = {x = 10, y = 3},
-	loc_vars = function()
-		return {}
-	end,
 	can_use = function()
 		for i=1, #G.jokers.cards do
 			if G.jokers.cards[i].ability.rental then
@@ -784,9 +613,6 @@ SMODS.Consumable {
 	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.extra.cards}}
 	end,
-	can_use = function()
-		return true
-	end,
 	use = function(self, card)
 		SMODS.draw_cards(card.ability.extra.cards)
 	end
@@ -801,12 +627,9 @@ SMODS.Consumable {
 	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.extra.ante_decrease, card.ability.extra.hands}}
 	end,
-	can_use = function()
-		return true
-	end,
 	use = function(self, card)
 		ease_ante(-card.ability.extra.ante_decrease)
-		G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.hands
+		ease_hands_played(card.ability.extra.hands)
 	end
 }
 
@@ -825,14 +648,9 @@ SMODS.Consumable {
 			}
 		}
 	end,
-	can_use = function()
-		return true
-	end,
 	use = function(self, card)
 		for i=1, card.ability.extra.amount do
-			local card = create_card(card.ability.type, G.consumeables, nil, nil, true, true)
-			card:add_to_deck()
-			G.consumeables:emplace(card)
+			SMODS.add_card({set = card.ability.extra.type})
 		end
 	end
 }
@@ -902,37 +720,8 @@ SMODS.Consumable {
 		return {vars = {card.ability.max_highlighted}}
 	end,
 	use = function(self, card, area, copier)
-		local used_consumable = copier or card
-		for i = 1, #G.hand.highlighted do
-			local highlighted = G.hand.highlighted[i]
-			if highlighted ~= card then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						play_sound("tarot1")
-						highlighted:juice_up(0.3, 0.5)
-						return true
-					end,
-				}))
-				G.E_MANAGER:add_event(Event({
-					trigger = "after",
-					delay = 0.1,
-					func = function()
-						if highlighted then
-							highlighted:set_edition({negative=true})
-						end
-						return true
-					end,
-				}))
-				delay(0.5)
-				G.E_MANAGER:add_event(Event({
-					trigger = "after",
-					delay = 0.2,
-					func = function()
-						G.hand:unhighlight_all()
-						return true
-					end,
-				}))
-			end
+		for i, j in ipairs(G.hand.highlighted) do
+			j:set_edition({negative=true})
 		end
 	end
 }
