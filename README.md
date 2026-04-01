@@ -1,3 +1,5 @@
+# NOTE: This mod is no longer being worked on. This repository is kept for historical purposes.
+
 # Balatrium
 A Balatro mod that add chemical elements.
 
